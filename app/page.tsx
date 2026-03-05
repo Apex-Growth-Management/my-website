@@ -85,6 +85,70 @@ export default function Home() {
         </div>
       </section>
 
+      {/* How It Works */}
+      <section className="py-24 px-6">
+        <div className="max-w-4xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-5xl font-bold mb-4">How It Works</h2>
+            <p className="text-white/50 text-lg max-w-xl mx-auto">
+              From first call to live site in as little as a week.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {[
+              { step: "01", title: "Get in Touch", desc: "Fill out our contact form or give us a call. We'll learn about your business and what you need." },
+              { step: "02", title: "We Build It", desc: "We design and build your site. You'll get a preview link to review before anything goes live." },
+              { step: "03", title: "You Launch", desc: "Once you're happy, we go live on your domain. We handle everything — no technical knowledge needed." },
+            ].map((item) => (
+              <div key={item.step} className="flex flex-col items-center text-center">
+                <div className="text-5xl font-extrabold text-blue-500/30 mb-4">{item.step}</div>
+                <h3 className="text-lg font-bold mb-2">{item.title}</h3>
+                <p className="text-white/50 text-sm leading-relaxed">{item.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Testimonials */}
+      <section className="py-24 px-6 bg-white/[0.02] border-y border-white/10">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-5xl font-bold mb-4">What Clients Say</h2>
+            <p className="text-white/50 text-lg max-w-xl mx-auto">
+              Real results for real businesses.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {[
+              {
+                quote: "Apex built our site in under a week and we started getting calls from Google within the first month. Best investment we've made.",
+                name: "James R.",
+                business: "JR Plumbing Co.",
+              },
+              {
+                quote: "I had no idea how bad our old website was until I saw the new one. Clean, fast, and our booking requests doubled.",
+                name: "Maria S.",
+                business: "Sunshine Cleaning Services",
+              },
+              {
+                quote: "They handle everything — updates, SEO, hosting. I don't have to think about it. That alone is worth the monthly fee.",
+                name: "David K.",
+                business: "K&D Electrical",
+              },
+            ].map((t) => (
+              <div key={t.name} className="bg-white/5 border border-white/10 rounded-2xl p-6">
+                <p className="text-white/70 text-sm leading-relaxed mb-6">"{t.quote}"</p>
+                <div>
+                  <div className="font-semibold text-sm">{t.name}</div>
+                  <div className="text-white/40 text-xs">{t.business}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* CTA */}
       <section className="py-24 px-6">
         <div className="max-w-3xl mx-auto text-center">
