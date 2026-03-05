@@ -16,8 +16,7 @@ export default function Navbar() {
 
         {/* Desktop nav */}
         <div className="hidden md:flex items-center gap-8 text-sm font-medium">
-          <a href="tel:9197440504" className="text-white/60 hover:text-white transition-colors">(919) 744-0504</a>
-          <Link href="/" className="text-white/60 hover:text-white transition-colors">Home</Link>
+<Link href="/" className="text-white/60 hover:text-white transition-colors">Home</Link>
           <Link href="/services" className="text-white/60 hover:text-white transition-colors">Services</Link>
           <Link href="/pricing" className="text-white/60 hover:text-white transition-colors">Pricing</Link>
           <Link href="/about" className="text-white/60 hover:text-white transition-colors">About</Link>
