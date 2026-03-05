@@ -7,7 +7,7 @@ interface Post {
   title: string;
   publishedAt: string;
   excerpt: string;
-  body: unknown[];
+  body: import("@portabletext/types").PortableTextBlock[];
 }
 
 async function getPost(slug: string): Promise<Post | null> {
