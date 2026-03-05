@@ -116,12 +116,10 @@ export default function ContactPage() {
             </form>
           )}
 
-          <p className="text-center text-white/30 text-sm mt-8">
-            Prefer email? Reach us at{" "}
-            <a href="mailto:admin@apexgrowthmanagement.com" className="text-blue-400 hover:text-blue-300 transition-colors">
-              admin@apexgrowthmanagement.com
-            </a>
-          </p>
+          <div className="flex flex-col items-center gap-2 mt-8 text-sm text-white/30">
+            <p>Call or text us: <a href="tel:9197440504" className="text-blue-400 hover:text-blue-300 transition-colors">(919) 744-0504</a></p>
+            <p>Or email: <a href="mailto:admin@apexgrowthmanagement.com" className="text-blue-400 hover:text-blue-300 transition-colors">admin@apexgrowthmanagement.com</a></p>
+          </div>
         </div>
       </section>
 
