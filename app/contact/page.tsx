@@ -29,9 +29,17 @@ export default function ContactPage() {
         <div className="max-w-2xl mx-auto">
           <div className="text-center mb-12">
             <h1 className="text-4xl md:text-6xl font-extrabold mb-4">Get in Touch</h1>
-            <p className="text-white/50 text-lg">
+            <p className="text-white/50 text-lg mb-6">
               Tell us about your project and we'll get back to you within 24 hours.
             </p>
+            <a
+              href="https://calendly.com/admin-apexgrowthmanagement/30min"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-block bg-white/10 hover:bg-white/20 border border-white/20 text-white font-semibold px-6 py-3 rounded-full transition-colors text-sm"
+            >
+              📅 Prefer to talk? Book a free 30-min call
+            </a>
           </div>
 
           {status === "success" ? (
