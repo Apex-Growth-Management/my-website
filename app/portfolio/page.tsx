@@ -18,7 +18,7 @@ const templates = [
     description:
       "An upscale restaurant template with a warm, inviting feel. Includes a full menu page, about section, and reservation contact form.",
     features: ["Menu Page", "Reservation Form", "About / Story", "Mobile Responsive"],
-    demo: "https://restaurant-template-coral.vercel.app",
+    demo: "https://restaurant-template-plum-sigma.vercel.app",
     accent: "amber",
   },
 ];
