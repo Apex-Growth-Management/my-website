@@ -24,13 +24,13 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
   if (!post) notFound();
 
   return (
-    <main className="bg-black text-white pt-24 min-h-screen">
+    <main className="bg-white text-gray-900 pt-24 min-h-screen">
       <section className="py-20 px-6">
         <div className="max-w-3xl mx-auto">
-          <Link href="/blog" className="text-blue-400 hover:text-blue-300 text-sm font-medium mb-8 inline-block">
+          <Link href="/blog" className="text-blue-600 hover:text-blue-500 text-sm font-medium mb-8 inline-block">
             ← Back to Blog
           </Link>
-          <div className="text-white/30 text-sm mb-4">
+          <div className="text-gray-400 text-sm mb-4">
             {new Date(post.publishedAt).toLocaleDateString("en-US", {
               year: "numeric",
               month: "long",
@@ -38,14 +38,14 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
             })}
           </div>
           <h1 className="text-3xl md:text-5xl font-extrabold mb-6">{post.title}</h1>
-          <p className="text-white/50 text-lg mb-10 border-l-2 border-blue-500 pl-4">{post.excerpt}</p>
-          <div className="prose prose-invert prose-lg max-w-none prose-headings:text-white prose-p:text-white/70 prose-strong:text-white prose-a:text-blue-400">
+          <p className="text-gray-500 text-lg mb-10 border-l-2 border-blue-500 pl-4">{post.excerpt}</p>
+          <div className="prose prose-lg max-w-none prose-headings:text-gray-900 prose-p:text-gray-600 prose-strong:text-gray-900 prose-a:text-blue-600">
             <PortableText value={post.body} />
           </div>
         </div>
       </section>
 
-      <section className="py-16 px-6 border-t border-white/10 text-center">
+      <section className="py-16 px-6 border-t border-gray-200 text-center">
         <h3 className="text-2xl font-bold mb-4">Ready to grow your business online?</h3>
         <Link
           href="/contact"
@@ -55,8 +55,14 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
         </Link>
       </section>
 
-      <footer className="border-t border-white/10 py-8 px-6 text-center text-white/30 text-sm">
-        © {new Date().getFullYear()} Apex Growth Management. All rights reserved.
+      <footer className="bg-gray-900 py-10 px-6 text-center text-sm">
+        <p className="text-white font-semibold mb-1">Apex Growth Management</p>
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mt-2 text-white/50">
+          <a href="tel:9197440504" className="hover:text-white transition-colors">(919) 744-0504</a>
+          <span className="hidden sm:inline text-white/20">·</span>
+          <a href="mailto:admin@apexgrowthmanagement.com" className="hover:text-white transition-colors">admin@apexgrowthmanagement.com</a>
+        </div>
+        <p className="text-white/30 mt-4">© {new Date().getFullYear()} Apex Growth Management. All rights reserved.</p>
       </footer>
     </main>
   );
