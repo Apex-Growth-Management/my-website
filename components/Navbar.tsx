@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
@@ -9,9 +10,8 @@ export default function Navbar() {
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-gray-900/95 backdrop-blur border-b border-white/10">
       <div className="max-w-6xl mx-auto px-6 flex items-center justify-between h-16">
-        <Link href="/" className="text-xl font-bold tracking-tight">
-          <span className="text-white">Apex</span>
-          <span className="text-blue-400"> Growth</span>
+        <Link href="/" className="flex items-center">
+          <Image src="/logo.png" alt="Apex Growth Management" width={120} height={40} className="brightness-0 invert" style={{ objectFit: "contain" }} />
         </Link>
 
         {/* Desktop nav */}
