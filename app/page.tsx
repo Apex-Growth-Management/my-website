@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { Monitor, Zap, Wrench, TrendingUp } from "lucide-react";
+import { Monitor, Zap, Wrench, TrendingUp, MapPin, Clock, ShieldCheck, HeadphonesIcon } from "lucide-react";
 
 const services = [
   { Icon: Monitor, title: "Website Design", description: "Custom, professional websites built to convert visitors into customers." },
@@ -34,10 +34,21 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Trust bar */}
+      <section className="py-5 px-6 border-b border-gray-100 bg-white">
+        <div className="max-w-5xl mx-auto flex flex-wrap items-center justify-center gap-x-10 gap-y-3 text-sm text-gray-500">
+          <div className="flex items-center gap-2"><MapPin className="w-4 h-4 text-blue-600 shrink-0" /><span>Based in Raleigh, NC</span></div>
+          <div className="flex items-center gap-2"><Clock className="w-4 h-4 text-blue-600 shrink-0" /><span>Sites delivered in 5–7 days</span></div>
+          <div className="flex items-center gap-2"><ShieldCheck className="w-4 h-4 text-blue-600 shrink-0" /><span>No long-term contracts</span></div>
+          <div className="flex items-center gap-2"><HeadphonesIcon className="w-4 h-4 text-blue-600 shrink-0" /><span>Ongoing support included</span></div>
+        </div>
+      </section>
+
       {/* Services Overview */}
       <section className="py-24 px-6 bg-gray-50">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
+            <p className="text-blue-600 text-sm font-semibold uppercase tracking-widest mb-3">Services</p>
             <h2 className="text-3xl md:text-5xl font-bold mb-4">What We Do</h2>
             <p className="text-gray-500 text-lg max-w-xl mx-auto">Everything your business needs to succeed online — all in one place.</p>
           </div>
@@ -62,17 +73,18 @@ export default function Home() {
       <section className="py-24 px-6">
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-16">
+            <p className="text-blue-600 text-sm font-semibold uppercase tracking-widest mb-3">The Process</p>
             <h2 className="text-3xl md:text-5xl font-bold mb-4">How It Works</h2>
             <p className="text-gray-500 text-lg max-w-xl mx-auto">From first call to live site in as little as a week.</p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {[
-              { step: "01", title: "Get in Touch", desc: "Fill out our contact form or give us a call. We'll learn about your business and what you need." },
-              { step: "02", title: "We Build It", desc: "We design and build your site. You'll get a preview link to review before anything goes live." },
-              { step: "03", title: "You Launch", desc: "Once you're happy, we go live on your domain. We handle everything — no technical knowledge needed." },
+              { step: 1, title: "Get in Touch", desc: "Fill out our contact form or give us a call. We'll learn about your business and what you need." },
+              { step: 2, title: "We Build It", desc: "We design and build your site. You'll get a preview link to review before anything goes live." },
+              { step: 3, title: "You Launch", desc: "Once you're happy, we go live on your domain. We handle everything — no technical knowledge needed." },
             ].map((item) => (
               <div key={item.step} className="flex flex-col items-center text-center">
-                <div className="text-5xl font-extrabold text-gray-200 mb-4">{item.step}</div>
+                <div className="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold text-lg mb-5 shrink-0">{item.step}</div>
                 <h3 className="text-lg font-bold mb-2">{item.title}</h3>
                 <p className="text-gray-500 text-sm leading-relaxed">{item.desc}</p>
               </div>

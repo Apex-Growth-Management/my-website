@@ -1,8 +1,8 @@
 import Link from "next/link";
 
 const templates = [
-  { name: "Arctic Air HVAC", industry: "HVAC / Home Services", colors: "Black & Red", description: "A bold, conversion-focused template for heating and cooling companies. Includes emergency service CTA, service pages, and a contact form.", features: ["24/7 Emergency Banner","Service Pages","Contact Form","Mobile Responsive"], demo: "https://hvac-template-taupe.vercel.app", accent: "red" },
-  { name: "Ember & Oak Kitchen", industry: "Restaurant / Dining", colors: "Black & Amber", description: "An upscale restaurant template with a warm, inviting feel. Includes a full menu page, about section, and reservation contact form.", features: ["Menu Page","Reservation Form","About / Story","Mobile Responsive"], demo: "https://restaurant-template-plum-sigma.vercel.app", accent: "amber" },
+  { name: "Arctic Air HVAC", industry: "HVAC / Home Services", colors: "White & Red", description: "A clean, conversion-focused template for heating and cooling companies. Includes emergency service CTA, service area pages, and a quote request form.", features: ["24/7 Emergency Banner","Service Pages","Contact Form","Mobile Responsive"], demo: "https://hvac-template-taupe.vercel.app", accent: "red" },
+  { name: "Ember & Oak Kitchen", industry: "Restaurant / Dining", colors: "Dark & Amber", description: "An upscale restaurant template with a warm, inviting feel. Includes a full menu page, about section, and reservation contact form.", features: ["Menu Page","Reservation Form","About / Story","Mobile Responsive"], demo: "https://restaurant-template-plum-sigma.vercel.app", accent: "amber" },
 ];
 
 export default function PortfolioPage() {
