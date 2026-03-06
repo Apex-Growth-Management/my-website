@@ -106,6 +106,8 @@ export default function PricingPage() {
         <div className="flex flex-col sm:flex-row items-center justify-center gap-3 text-white/50">
           <a href="tel:9197440504" className="hover:text-white transition-colors">(919) 744-0504</a>
           <span className="hidden sm:inline text-white/20">·</span>
+          <a href="tel:9196065609" className="hover:text-white transition-colors">(919) 606-5609</a>
+          <span className="hidden sm:inline text-white/20">·</span>
           <a href="mailto:admin@apexgrowthmanagement.com" className="hover:text-white transition-colors">admin@apexgrowthmanagement.com</a>
         </div>
         <p className="text-white/30 mt-4">© {new Date().getFullYear()} Apex Growth Management. All rights reserved.</p>
