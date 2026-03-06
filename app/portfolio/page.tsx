@@ -3,6 +3,7 @@ import Link from "next/link";
 const templates = [
   { name: "Arctic Air HVAC", industry: "HVAC / Home Services", colors: "White & Red", description: "A clean, conversion-focused template for heating and cooling companies. Includes emergency service CTA, service area pages, and a quote request form.", features: ["24/7 Emergency Banner","Service Pages","Contact Form","Mobile Responsive"], demo: "https://hvac-template-taupe.vercel.app", accent: "red" },
   { name: "Ember & Oak Kitchen", industry: "Restaurant / Dining", colors: "Dark & Amber", description: "An upscale restaurant template with a warm, inviting feel. Includes a full menu page, about section, and reservation contact form.", features: ["Menu Page","Reservation Form","About / Story","Mobile Responsive"], demo: "https://restaurant-template-plum-sigma.vercel.app", accent: "amber" },
+  { name: "BlueLine Plumbing & Drain", industry: "Plumbing / Home Services", colors: "White & Blue", description: "A professional plumbing template built for trust and conversions. Includes an emergency page, service area section, FAQ, customer reviews, and a results photo gallery.", features: ["24/7 Emergency Page","FAQ Section","Results Gallery","Sticky Call Button","Contact Form","Mobile Responsive"], demo: "https://plumber-template-neon.vercel.app", accent: "blue" },
 ];
 
 export default function PortfolioPage() {
@@ -19,14 +20,14 @@ export default function PortfolioPage() {
           <div className="grid md:grid-cols-2 gap-8">
             {templates.map((t) => (
               <div key={t.name} className="bg-gray-50 border border-gray-200 rounded-2xl overflow-hidden hover:border-gray-300 transition-colors">
-                <div className={`h-2 w-full ${t.accent === "red" ? "bg-red-600" : "bg-amber-500"}`} />
+                <div className={`h-2 w-full ${t.accent === "red" ? "bg-red-600" : t.accent === "amber" ? "bg-amber-500" : "bg-blue-600"}`} />
                 <div className="p-8">
                   <div className="flex items-start justify-between mb-4">
                     <div>
                       <h2 className="text-xl font-bold">{t.name}</h2>
                       <p className="text-gray-400 text-sm mt-1">{t.industry}</p>
                     </div>
-                    <span className={`text-xs font-semibold px-3 py-1 rounded-full border ${t.accent === "red" ? "border-red-300 text-red-600 bg-red-50" : "border-amber-300 text-amber-600 bg-amber-50"}`}>{t.colors}</span>
+                    <span className={`text-xs font-semibold px-3 py-1 rounded-full border ${t.accent === "red" ? "border-red-300 text-red-600 bg-red-50" : t.accent === "amber" ? "border-amber-300 text-amber-600 bg-amber-50" : "border-blue-300 text-blue-600 bg-blue-50"}`}>{t.colors}</span>
                   </div>
                   <p className="text-gray-600 text-sm leading-relaxed mb-6">{t.description}</p>
                   <ul className="flex flex-wrap gap-2 mb-8">
@@ -34,7 +35,7 @@ export default function PortfolioPage() {
                       <li key={f} className="text-xs bg-white border border-gray-200 rounded-full px-3 py-1 text-gray-500">{f}</li>
                     ))}
                   </ul>
-                  <a href={t.demo} target="_blank" rel="noopener noreferrer" className={`inline-block font-semibold px-6 py-3 rounded-full text-sm transition-colors text-white ${t.accent === "red" ? "bg-red-600 hover:bg-red-500" : "bg-amber-500 hover:bg-amber-400"}`}>View Live Demo →</a>
+                  <a href={t.demo} target="_blank" rel="noopener noreferrer" className={`inline-block font-semibold px-6 py-3 rounded-full text-sm transition-colors text-white ${t.accent === "red" ? "bg-red-600 hover:bg-red-500" : t.accent === "amber" ? "bg-amber-500 hover:bg-amber-400" : "bg-blue-600 hover:bg-blue-500"}`}>View Live Demo →</a>
                 </div>
               </div>
             ))}
