@@ -81,7 +81,7 @@ export default function ContactPage() {
           )}
 
           <div className="flex flex-col items-center gap-2 mt-8 text-sm text-gray-400">
-            <p>Call or text us: <a href="tel:9197440504" className="text-blue-600 hover:text-blue-500 transition-colors">(919) 744-0504</a></p>
+            <p>Call or text us: <a href="tel:9197440504" className="text-blue-600 hover:text-blue-500 transition-colors">(919) 744-0504</a> · <a href="tel:9196065609" className="text-blue-600 hover:text-blue-500 transition-colors">(919) 606-5609</a></p>
             <p>Or email: <a href="mailto:admin@apexgrowthmanagement.com" className="text-blue-600 hover:text-blue-500 transition-colors">admin@apexgrowthmanagement.com</a></p>
           </div>
         </div>
@@ -93,6 +93,8 @@ export default function ContactPage() {
         <p className="text-white/60 text-sm mb-3">Raleigh, NC</p>
         <div className="flex flex-col sm:flex-row items-center justify-center gap-3 text-white/50">
           <a href="tel:9197440504" className="hover:text-white transition-colors">(919) 744-0504</a>
+          <span className="hidden sm:inline text-white/20">·</span>
+          <a href="tel:9196065609" className="hover:text-white transition-colors">(919) 606-5609</a>
           <span className="hidden sm:inline text-white/20">·</span>
           <a href="mailto:admin@apexgrowthmanagement.com" className="hover:text-white transition-colors">admin@apexgrowthmanagement.com</a>
         </div>
