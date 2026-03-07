@@ -169,7 +169,7 @@ export default function PricingPage() {
                 { q: "Can I cancel the monthly retainer?", a: "Yes, you can cancel anytime with 30 days written notice. If you cancel, you keep your domain and we can transfer your site files to you." },
                 { q: "How long does it take to build my site?", a: "Most sites are delivered within 2–3 business days after we receive your completed onboarding form and all required materials." },
                 { q: "What counts as a minor update?", a: "Text changes, image swaps, adding a new section, updating hours or pricing — anything that takes under an hour. Larger changes are quoted separately." },
-                { q: "Can I pay directly without a consultation?", a: "Yes — each plan has a 'Pay now' link to pay directly via Stripe. We'll follow up with an onboarding form right after payment." },
+                { q: "Can I pay directly without a consultation?", a: "Yes — each plan has a 'Pay now' link to pay via Stripe. After paying, fill out our onboarding form at jotform.com/form/260581311492049 so we can get started right away." },
               ].map((item) => (
                 <div key={item.q} className="border border-gray-200 rounded-2xl p-6 bg-gray-50">
                   <h3 className="font-semibold mb-2">{item.q}</h3>

@@ -43,7 +43,12 @@ export default function ContactPage() {
                 <svg className="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>
               </div>
               <h2 className="text-2xl font-bold mb-2">Message Sent!</h2>
-              <p className="text-gray-500">We'll get back to you within 24 hours.</p>
+              <p className="text-gray-500 mb-6">We'll get back to you within 24 hours.</p>
+              <div className="bg-blue-50 border border-blue-200 rounded-2xl p-6 text-left max-w-md mx-auto">
+                <p className="text-blue-800 font-semibold text-sm mb-1">Already ready to move forward?</p>
+                <p className="text-blue-700 text-sm mb-4">Fill out our onboarding form so we can hit the ground running when we connect.</p>
+                <a href="https://www.jotform.com/form/260581311492049" target="_blank" rel="noopener noreferrer" className="inline-block bg-blue-600 hover:bg-blue-500 text-white font-semibold px-5 py-2.5 rounded-full text-sm transition-colors">Fill Out Onboarding Form →</a>
+              </div>
             </div>
           ) : (
             <form onSubmit={handleSubmit} className="flex flex-col gap-5">

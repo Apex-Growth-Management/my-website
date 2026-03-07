@@ -33,6 +33,42 @@ export default function RootLayout({
             gtag('config', 'G-YYHZEHE1WK');
           `}
         </Script>
+        <Script
+          id="local-business-schema"
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "LocalBusiness",
+              "name": "Apex Growth Management",
+              "description": "Professional website design, hosting, SEO optimization, and ongoing support for businesses in Raleigh, NC.",
+              "url": "https://apexgrowthmanagement.com",
+              "telephone": "+19197440504",
+              "email": "admin@apexgrowthmanagement.com",
+              "address": {
+                "@type": "PostalAddress",
+                "addressLocality": "Raleigh",
+                "addressRegion": "NC",
+                "addressCountry": "US"
+              },
+              "geo": {
+                "@type": "GeoCoordinates",
+                "latitude": 35.7796,
+                "longitude": -78.6382
+              },
+              "areaServed": {
+                "@type": "State",
+                "name": "North Carolina"
+              },
+              "serviceType": ["Web Design", "SEO Optimization", "Web Hosting", "Website Maintenance"],
+              "priceRange": "$$",
+              "sameAs": [
+                "https://www.instagram.com/apexgrowthmanagement/"
+              ]
+            })
+          }}
+          strategy="afterInteractive"
+        />
       </head>
       <body className={`${geist.variable} antialiased bg-black text-white`}>
         <Navbar />
