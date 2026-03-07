@@ -65,7 +65,7 @@ export default function Home() {
       >
         <div className="max-w-5xl mx-auto flex flex-wrap items-center justify-center gap-x-10 gap-y-3 text-sm text-gray-500">
           <div className="flex items-center gap-2"><MapPin className="w-4 h-4 text-blue-600 shrink-0" /><span>Based in Raleigh, NC</span></div>
-          <div className="flex items-center gap-2"><Clock className="w-4 h-4 text-blue-600 shrink-0" /><span>Sites delivered in 5–7 days</span></div>
+          <div className="flex items-center gap-2"><Clock className="w-4 h-4 text-blue-600 shrink-0" /><span>Sites delivered in 2–3 days</span></div>
           <div className="flex items-center gap-2"><ShieldCheck className="w-4 h-4 text-blue-600 shrink-0" /><span>No long-term contracts</span></div>
           <div className="flex items-center gap-2"><HeadphonesIcon className="w-4 h-4 text-blue-600 shrink-0" /><span>Ongoing support included</span></div>
         </div>
