@@ -50,7 +50,7 @@ export default function Home() {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link href="/contact" className="bg-blue-600 hover:bg-blue-500 text-white font-semibold px-8 py-4 rounded-full text-lg transition-colors">Get Started</Link>
-            <Link href="/services" className="border border-white/30 hover:border-white/60 text-white/80 hover:text-white font-semibold px-8 py-4 rounded-full text-lg transition-colors">Our Services</Link>
+            <a href="https://calendly.com/admin-apexgrowthmanagement/30min" target="_blank" rel="noopener noreferrer" className="border border-white/30 hover:border-white/60 text-white/80 hover:text-white font-semibold px-8 py-4 rounded-full text-lg transition-colors">Book a Free Call</a>
           </div>
         </motion.div>
       </section>
@@ -152,6 +152,53 @@ export default function Home() {
                 <p className="text-gray-500 text-sm leading-relaxed">{item.desc}</p>
               </motion.div>
             ))}
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Pricing Strip */}
+      <section className="py-20 px-6 bg-gray-900">
+        <div className="max-w-5xl mx-auto">
+          <motion.div
+            className="text-center mb-12"
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+          >
+            <p className="text-blue-400 text-sm font-semibold uppercase tracking-widest mb-3">Pricing</p>
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-3">Transparent Pricing. No Surprises.</h2>
+            <p className="text-white/50 max-w-lg mx-auto">Know exactly what you&apos;ll pay before signing anything.</p>
+          </motion.div>
+          <motion.div
+            className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10"
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+          >
+            {[
+              { label: "Website Builds", value: "From $1,000", sub: "One-time setup fee" },
+              { label: "Monthly Retainer", value: "From $249/mo", sub: "Hosting · updates · SEO" },
+              { label: "Contracts", value: "None", sub: "Cancel anytime, 30-day notice" },
+            ].map((item) => (
+              <motion.div key={item.label} variants={fadeUp} className="bg-white/5 border border-white/10 rounded-2xl p-8 text-center hover:bg-white/8 transition-colors">
+                <p className="text-white/40 text-sm font-medium uppercase tracking-wider mb-3">{item.label}</p>
+                <p className="text-3xl font-extrabold text-white mb-2">{item.value}</p>
+                <p className="text-white/40 text-sm">{item.sub}</p>
+              </motion.div>
+            ))}
+          </motion.div>
+          <motion.div
+            className="text-center"
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+          >
+            <Link href="/pricing" className="inline-block border border-white/20 hover:border-white/50 text-white/70 hover:text-white font-semibold px-8 py-3 rounded-full transition-colors text-sm">
+              See Full Pricing →
+            </Link>
           </motion.div>
         </div>
       </section>
