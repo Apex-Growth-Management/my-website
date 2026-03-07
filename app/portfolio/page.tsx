@@ -4,9 +4,9 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 
 const templates = [
-  { name: "Arctic Air HVAC", industry: "HVAC / Home Services", colors: "White & Red", description: "A clean, conversion-focused template for heating and cooling companies. Includes emergency service CTA, service area pages, and a quote request form.", features: ["24/7 Emergency Banner", "Service Pages", "Contact Form", "Mobile Responsive"], demo: "https://hvac-template-taupe.vercel.app", accent: "red" },
-  { name: "Ember & Oak Kitchen", industry: "Restaurant / Dining", colors: "Dark & Amber", description: "An upscale restaurant template with a warm, inviting feel. Includes a full menu page, about section, and reservation contact form.", features: ["Menu Page", "Reservation Form", "About / Story", "Mobile Responsive"], demo: "https://restaurant-template-plum-sigma.vercel.app", accent: "amber" },
-  { name: "BlueLine Plumbing & Drain", industry: "Plumbing / Home Services", colors: "White & Blue", description: "A professional plumbing template built for trust and conversions. Includes an emergency page, service area section, FAQ, customer reviews, and a results photo gallery.", features: ["24/7 Emergency Page", "FAQ Section", "Results Gallery", "Sticky Call Button", "Contact Form", "Mobile Responsive"], demo: "https://plumber-template-neon.vercel.app", accent: "blue" },
+  { name: "Arctic Air HVAC", industry: "HVAC / Home Services", colors: "White & Red", description: "A clean, conversion-focused template for heating and cooling companies. Includes emergency service CTA, service area pages, and a quote request form.", features: ["24/7 Emergency Banner", "Service Pages", "Contact Form", "Mobile Responsive"], demo: "https://hvac-template-taupe.vercel.app", accent: "red", screenshot: "/portfolio-hvac.jpg" },
+  { name: "Ember & Oak Kitchen", industry: "Restaurant / Dining", colors: "Dark & Amber", description: "An upscale restaurant template with a warm, inviting feel. Includes a full menu page, about section, and reservation contact form.", features: ["Menu Page", "Reservation Form", "About / Story", "Mobile Responsive"], demo: "https://restaurant-template-plum-sigma.vercel.app", accent: "amber", screenshot: "/portfolio-restaurant.jpg" },
+  { name: "BlueLine Plumbing & Drain", industry: "Plumbing / Home Services", colors: "White & Blue", description: "A professional plumbing template built for trust and conversions. Includes an emergency page, service area section, FAQ, customer reviews, and a results photo gallery.", features: ["24/7 Emergency Page", "FAQ Section", "Results Gallery", "Sticky Call Button", "Contact Form", "Mobile Responsive"], demo: "https://plumber-template-neon.vercel.app", accent: "blue", screenshot: "/portfolio-plumber.jpg" },
 ];
 
 const fadeUp = {
@@ -49,7 +49,10 @@ export default function PortfolioPage() {
                 transition={{ type: "spring", stiffness: 300, damping: 24 }}
                 className="bg-gray-50 border border-gray-200 rounded-2xl overflow-hidden"
               >
-                <div className={`h-2 w-full ${t.accent === "red" ? "bg-red-600" : t.accent === "amber" ? "bg-amber-500" : "bg-blue-600"}`} />
+                <div className="relative h-48 overflow-hidden">
+                  <img src={t.screenshot} alt={`${t.name} website preview`} className="w-full h-full object-cover object-top" />
+                  <div className={`absolute bottom-0 left-0 right-0 h-1 ${t.accent === "red" ? "bg-red-600" : t.accent === "amber" ? "bg-amber-500" : "bg-blue-600"}`} />
+                </div>
                 <div className="p-8">
                   <div className="flex items-start justify-between mb-4">
                     <div>
@@ -100,6 +103,11 @@ export default function PortfolioPage() {
           <a href="mailto:admin@apexgrowthmanagement.com" className="hover:text-white transition-colors">admin@apexgrowthmanagement.com</a>
         </div>
         <p className="text-white/30 mt-4">© {new Date().getFullYear()} Apex Growth Management. All rights reserved.</p>
+        <div className="flex justify-center gap-4 mt-2 text-white/20 text-xs">
+          <a href="/privacy" className="hover:text-white/50 transition-colors">Privacy Policy</a>
+          <span>·</span>
+          <a href="/terms" className="hover:text-white/50 transition-colors">Terms of Service</a>
+        </div>
       </footer>
     </main>
   );

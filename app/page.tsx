@@ -245,6 +245,11 @@ export default function Home() {
           </a>
         </div>
         <p className="text-white/30 mt-4">© {new Date().getFullYear()} Apex Growth Management. All rights reserved.</p>
+        <div className="flex justify-center gap-4 mt-2 text-white/20 text-xs">
+          <a href="/privacy" className="hover:text-white/50 transition-colors">Privacy Policy</a>
+          <span>·</span>
+          <a href="/terms" className="hover:text-white/50 transition-colors">Terms of Service</a>
+        </div>
       </footer>
     </main>
   );
