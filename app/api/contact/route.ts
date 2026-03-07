@@ -32,21 +32,77 @@ export async function POST(req: Request) {
     from: "Apex Growth Management <noreply@apexgrowthmanagement.com>",
     to: email,
     subject: "We got your message — we'll be in touch soon!",
-    html: `
-      <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto; color: #111;">
-        <h2 style="color: #2563eb;">Thanks for reaching out, ${firstName}!</h2>
-        <p>We received your message and will get back to you within 24 hours.</p>
-        <p>Here's a summary of what you sent us:</p>
-        <table style="width: 100%; border-collapse: collapse; margin: 16px 0;">
-          <tr><td style="padding: 8px; border-bottom: 1px solid #e5e7eb; color: #6b7280;">Service</td><td style="padding: 8px; border-bottom: 1px solid #e5e7eb;">${service || "Not specified"}</td></tr>
-          ${business ? `<tr><td style="padding: 8px; border-bottom: 1px solid #e5e7eb; color: #6b7280;">Business</td><td style="padding: 8px; border-bottom: 1px solid #e5e7eb;">${business}</td></tr>` : ""}
-          <tr><td style="padding: 8px; border-bottom: 1px solid #e5e7eb; color: #6b7280;">Message</td><td style="padding: 8px; border-bottom: 1px solid #e5e7eb;">${message}</td></tr>
-        </table>
-        <p>In the meantime, feel free to <a href="https://calendly.com/admin-apexgrowthmanagement/30min" style="color: #2563eb;">book a free 30-min call</a> if you'd prefer to talk.</p>
-        <hr style="border: none; border-top: 1px solid #e5e7eb; margin: 24px 0;" />
-        <p style="color: #6b7280; font-size: 14px;">Apex Growth Management · Raleigh, NC · (919) 744-0504</p>
-      </div>
-    `,
+    html: `<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"></head>
+<body style="margin:0;padding:0;background-color:#f3f4f6;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;">
+  <table width="100%" cellpadding="0" cellspacing="0" style="background-color:#f3f4f6;padding:32px 16px;">
+    <tr><td align="center">
+      <table width="600" cellpadding="0" cellspacing="0" style="max-width:600px;width:100%;">
+
+        <!-- Header -->
+        <tr><td style="background-color:#111827;border-radius:12px 12px 0 0;padding:32px;text-align:center;">
+          <img src="https://apexgrowthmanagement.com/logo.png" alt="Apex Growth Management" height="40" style="filter:brightness(0) invert(1);max-width:180px;" />
+        </td></tr>
+
+        <!-- Blue accent line -->
+        <tr><td style="background-color:#2563eb;height:4px;font-size:0;line-height:0;">&nbsp;</td></tr>
+
+        <!-- Body -->
+        <tr><td style="background-color:#ffffff;padding:40px 40px 32px;">
+          <h1 style="margin:0 0 8px;font-size:24px;font-weight:700;color:#111827;">Thanks for reaching out, ${firstName}!</h1>
+          <p style="margin:0 0 24px;font-size:16px;color:#6b7280;line-height:1.6;">We received your message and will get back to you within <strong style="color:#111827;">24 hours</strong>. Here's a summary of what you sent us:</p>
+
+          <!-- Summary box -->
+          <table width="100%" cellpadding="0" cellspacing="0" style="background-color:#f9fafb;border:1px solid #e5e7eb;border-radius:8px;margin-bottom:28px;">
+            <tr>
+              <td style="padding:14px 16px;border-bottom:1px solid #e5e7eb;font-size:13px;color:#6b7280;width:120px;vertical-align:top;">Service</td>
+              <td style="padding:14px 16px;border-bottom:1px solid #e5e7eb;font-size:14px;color:#111827;font-weight:500;">${service || "Not specified"}</td>
+            </tr>
+            ${business ? `<tr>
+              <td style="padding:14px 16px;border-bottom:1px solid #e5e7eb;font-size:13px;color:#6b7280;vertical-align:top;">Business</td>
+              <td style="padding:14px 16px;border-bottom:1px solid #e5e7eb;font-size:14px;color:#111827;font-weight:500;">${business}</td>
+            </tr>` : ""}
+            <tr>
+              <td style="padding:14px 16px;font-size:13px;color:#6b7280;vertical-align:top;">Message</td>
+              <td style="padding:14px 16px;font-size:14px;color:#111827;line-height:1.5;">${message}</td>
+            </tr>
+          </table>
+
+          <!-- Calendly CTA -->
+          <p style="margin:0 0 16px;font-size:15px;color:#374151;">Prefer to talk through it? Book a free 30-minute call at a time that works for you.</p>
+          <table cellpadding="0" cellspacing="0" style="margin-bottom:32px;">
+            <tr><td style="background-color:#2563eb;border-radius:50px;">
+              <a href="https://calendly.com/admin-apexgrowthmanagement/30min" style="display:inline-block;padding:14px 28px;font-size:15px;font-weight:600;color:#ffffff;text-decoration:none;">Book a Free Call →</a>
+            </td></tr>
+          </table>
+
+          <!-- Onboarding nudge -->
+          <table width="100%" cellpadding="0" cellspacing="0" style="background-color:#eff6ff;border:1px solid #bfdbfe;border-radius:8px;margin-bottom:8px;">
+            <tr><td style="padding:16px 20px;">
+              <p style="margin:0 0 4px;font-size:14px;font-weight:600;color:#1e40af;">Already ready to move forward?</p>
+              <p style="margin:0 0 12px;font-size:13px;color:#3b82f6;line-height:1.5;">Fill out our onboarding form so we can hit the ground running when we connect.</p>
+              <a href="https://www.jotform.com/form/260581311492049" style="font-size:13px;font-weight:600;color:#2563eb;text-decoration:underline;">Fill Out Onboarding Form →</a>
+            </td></tr>
+          </table>
+        </td></tr>
+
+        <!-- Footer -->
+        <tr><td style="background-color:#111827;border-radius:0 0 12px 12px;padding:24px 40px;text-align:center;">
+          <p style="margin:0 0 8px;font-size:13px;color:rgba(255,255,255,0.5);">Raleigh, NC</p>
+          <p style="margin:0;font-size:13px;color:rgba(255,255,255,0.4);">
+            <a href="tel:9197440504" style="color:rgba(255,255,255,0.5);text-decoration:none;">(919) 744-0504</a>
+            &nbsp;·&nbsp;
+            <a href="mailto:admin@apexgrowthmanagement.com" style="color:rgba(255,255,255,0.5);text-decoration:none;">admin@apexgrowthmanagement.com</a>
+          </p>
+          <p style="margin:12px 0 0;font-size:11px;color:rgba(255,255,255,0.25);">© ${new Date().getFullYear()} Apex Growth Management. All rights reserved.</p>
+        </td></tr>
+
+      </table>
+    </td></tr>
+  </table>
+</body>
+</html>`,
   });
 
   // Send to Zapier webhook
