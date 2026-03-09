@@ -171,6 +171,34 @@ Run ALL of the following without being asked. Flag anything that needs attention
   - Growth $349/mo → https://buy.stripe.com/eVq6oIaTZ696gTph0X0gw09
   - Premium $499/mo → https://buy.stripe.com/dRmaEY4vB0OMeLh2630gw0a
 
+## 21st.dev Magic — AUTO-USE WHEN BUILDING UI
+**When building any new UI section or component for a website (hero, navbar, cards, pricing, testimonials, CTA, forms, footers, feature grids, etc.), ALWAYS call `mcp__Magic__21st_magic_component_builder` FIRST.** Use it to generate a polished base, then adapt to the project's design system (colors, fonts, Tailwind classes). Do not write UI from scratch when Magic can give a better starting point.
+
+- Use `21st_magic_component_builder` — new components from a text prompt
+- Use `21st_magic_component_refiner` — improve or restyle an existing component
+- Use `21st_magic_component_inspiration` — when unsure what a section should look like
+- Use `logo_search` — find SVG logos for client sites
+
+## v0.dev Workflow
+v0.dev has no MCP — it's a web tool at https://v0.dev. Use it for complex multi-section layouts. Workflow:
+1. I generate an optimized v0 prompt describing the component/page
+2. Walker pastes it into v0.dev, copies the output back
+3. I adapt the output to the project stack (Tailwind v4, App Router, design system)
+For simple components, use Magic MCP instead (faster, no copy-paste needed).
+
+## Apify — Lead Scraping
+- MCP: `Apify` (requires restart after adding API key)
+- Primary use: scrape Google Maps for local business leads (HVAC, plumbers, restaurants, roofers in Raleigh area)
+- Key actors: `compass/crawler-google-places` for Google Maps, `apify/web-scraper` for websites
+- Token: set in `~/.claude.json` under `Apify.env.APIFY_TOKEN`
+- Get token: https://console.apify.com/account/integrations
+
+## Browserbase — Cloud Browser for Claude
+- MCP: `Browserbase` (requires restart after adding API keys)
+- Use for: visually inspecting client websites, taking screenshots of competitor sites, testing forms, scraping JS-heavy pages that Playwright can't reach locally
+- Keys: set in `~/.claude.json` under `Browserbase.env`
+- Get keys: https://browserbase.com → Dashboard → API Keys
+
 ## Sanity CMS (Blog)
 - Project ID: `g1hic8ei` | Dataset: `production`
 - Schema deployed 2026-03-09 — `create_documents_from_markdown` and `get_schema` now work
