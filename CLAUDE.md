@@ -61,6 +61,24 @@
 - Restaurant: https://restaurant-template-plum-sigma.vercel.app
 - Plumber: https://plumber-template-neon.vercel.app
 
+## Client Billing Workflow — AUTO-RUN WHEN TRIGGERED
+
+**Trigger: "send [client] an invoice" / "invoice [client] for [plan]"**
+1. Create Stripe customer: `mcp__Stripe__create_customer` (name + email)
+2. Create invoice: `mcp__Stripe__create_invoice` (customer ID, days_until_due: 7)
+3. Add line item: `mcp__Stripe__create_invoice_item` using the correct one-time price ID below
+4. Finalize: `mcp__Stripe__finalize_invoice` → return the hosted invoice URL to user
+- Standard $1,000: `price_1T6kvdJHaZ8GU7Z2tqbx9K7t`
+- Pro $1,500: `price_1T7USdJHaZ8GU7Z2IprxHkJv`
+- Premium $2,000: `price_1T7UVmJHaZ8GU7Z2dsOcIH2b`
+- Note: Jotform link is set as default memo in Stripe billing settings — auto-appears on every invoice
+
+**Trigger: "site is live" / "send [client] subscription link" / "site launched for [client]"**
+- Return the correct pre-made payment link based on their plan:
+  - Basic $249/mo → https://buy.stripe.com/28E7sM8LR696eLh7qn0gw08
+  - Growth $349/mo → https://buy.stripe.com/eVq6oIaTZ696gTph0X0gw09
+  - Premium $499/mo → https://buy.stripe.com/dRmaEY4vB0OMeLh2630gw0a
+
 ## Notes
 - No phone number in the navbar (removed by user request)
 - Blog pages use white background (`bg-white text-gray-900`), not dark
@@ -83,7 +101,7 @@ Config file location: `C:\Users\walke\.claude.json` (back up to a private GitHub
 | GitHub | HTTP | Active | PAT configured |
 | Stripe | HTTP | Active | Live key configured |
 | Vercel | HTTP | Active (OAuth) | Authorize on first use at mcp.vercel.com |
-| GoogleSearchConsole | npx | Active (OAuth) | Run `gsc-mcp-auth` in terminal to authenticate. If "Insufficient Permission" persists after auth, restart Claude Code — session must reload to pick up new tokens. Auth account: admin@apexgrowthmanagement.com |
+| GoogleSearchConsole | npx | Active (OAuth) | Auth account: admin@apexgrowthmanagement.com. Property verified 2026-03-08. If "Insufficient Permission", check that the GSC TXT record still exists in Cloudflare DNS — do NOT just restart Claude Code. |
 | Figma | HTTP | Active | Uses X-Figma-Token header — token configured |
 | Cloudflare | npx | Active | Workers, KV, D1 — token + account ID configured |
 | Context7 | npx | Active | Real-time library docs for coding |
