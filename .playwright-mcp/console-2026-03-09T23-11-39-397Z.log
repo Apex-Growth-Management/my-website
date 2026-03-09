@@ -1,2 +1,0 @@
-[   13489ms] [ERROR] Access to image at 'https://apexgrowthmanagement.com/logo.png' from origin 'null' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource. @ about:blank:0
-[   13489ms] [ERROR] Failed to load resource: net::ERR_FAILED @ https://apexgrowthmanagement.com/logo.png:0

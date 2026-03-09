@@ -1,9 +1,0 @@
-[    2095ms] [ERROR] Access to image at 'https://cdn.jotfor.ms//assets/img/favicons/favicon-2021-light.png?v=0.2' from origin 'https://www.jotform.com' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource. @ about:srcdoc:0
-[    2095ms] [ERROR] Failed to load resource: net::ERR_FAILED @ https://cdn.jotfor.ms//assets/img/favicons/favicon-2021-light.png?v=0.2:0
-[   53967ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ https://cdn.jotfor.ms/s/static/latest/js/rich-text-editor/skins/light/skin.min.css:0
-[  119542ms] [WARNING] [zustand devtools middleware] Please install/enable Redux devtools extension @ https://cdn.jotfor.ms/s/form-builder/6e3786a0ada/static/js/48946.bd6a9ae4.js:25
-[  913592ms] [ERROR] Access to image at 'https://cdn.jotfor.ms//assets/img/favicons/favicon-2021-light.png?v=0.2' from origin 'https://www.jotform.com' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource. @ about:srcdoc:0
-[  913592ms] [ERROR] Failed to load resource: net::ERR_FAILED @ https://cdn.jotfor.ms//assets/img/favicons/favicon-2021-light.png?v=0.2:0
-[  937045ms] [WARNING] [zustand devtools middleware] Please install/enable Redux devtools extension @ https://cdn.jotfor.ms/s/form-builder/6e3786a0ada/static/js/48946.bd6a9ae4.js:25
-[  948450ms] [ERROR] Access to image at 'https://cdn.jotfor.ms//assets/img/favicons/favicon-2021-light.png?v=0.2' from origin 'https://www.jotform.com' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource. @ about:srcdoc:0
-[  948450ms] [ERROR] Failed to load resource: net::ERR_FAILED @ https://cdn.jotfor.ms//assets/img/favicons/favicon-2021-light.png?v=0.2:0

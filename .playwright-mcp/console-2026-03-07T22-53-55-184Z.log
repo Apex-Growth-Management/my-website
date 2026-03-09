@@ -1,3 +1,0 @@
-[   36946ms] [ERROR] Connecting to 'https://www.docuseal.com/' violates the following Content Security Policy directive: "connect-src 'self' https://console.docuseal.com https://plausible.docuseal.tech https://api.rollbar.com https://docuseal.com https://id.eideasy.com". The action has been blocked. @ https://docuseal.com/sign_in:0
-[   36963ms] TypeError: Failed to fetch
-    at HTMLDocument.Qs (https://docuseal.com/packs/js/application-a66e048cf0b59935ea55.js:1:435033)
