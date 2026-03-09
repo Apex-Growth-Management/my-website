@@ -61,6 +61,37 @@
 - Restaurant: https://restaurant-template-plum-sigma.vercel.app
 - Plumber: https://plumber-template-neon.vercel.app
 
+## Morning Briefing — AUTO-RUN WHEN USER SAYS "Morning briefing — full auto"
+Run ALL of the following in parallel without asking permission. Flag anything needing attention. Everything normal gets ✓. Goal: Walker is fully up to speed in under 2 minutes.
+
+**Cross-Device Check (run first)**
+- If MEMORY.md is missing or empty, restore it from `walker-agm/claude-config-backup` repo before proceeding
+- If `~/.claude.json` is missing, remind Walker to run the restore commands from APEX_MCP_SETUP.md
+- Verify all MCP servers are responding (Sanity, HubSpot, Stripe, DocuSeal, Vercel, Cloudflare, Resend, GSC, GitHub, Calendly, Gmail)
+- Check Cloudflare API token is still valid
+
+**Site Health**
+- Ping main site (apexgrowthmanagement.com) and all client sites — flag any non-200 responses
+- Check Vercel for any failed or degraded deployments overnight across all projects
+- Check Sentry for any new unresolved errors since last session
+- Confirm apex-morning-digest Cloudflare Worker cron is active
+
+**Business Updates Since Last Session**
+- HubSpot — any new leads, deal stage changes, or deals stuck 7+ days
+- Stripe — any new payments received, failed charges, or overdue invoices
+- DocuSeal — any documents signed by client, or any stuck waiting for Walker to sign
+- Calendly — any meetings scheduled for today or tomorrow
+- Gmail — flag any client emails needing a response
+- Resend — any bounced or failed emails
+
+**Content & SEO**
+- Sanity — blog post count, any unpublished drafts
+- GSC — quick traffic snapshot vs prior 7 days, flag any ranking drops or wins
+
+**Reminders**
+- Jotform — remind Walker to check for new onboarding submissions manually
+- Flag if blog is behind the 2x/week schedule
+
 ## End of Session — AUTO-RUN WHEN USER SAYS "End of session — update everything"
 Run ALL of the following without being asked. Flag anything that needs attention.
 
@@ -68,27 +99,28 @@ Run ALL of the following without being asked. Flag anything that needs attention
 1. **MEMORY.md** — update with anything new learned this session (tools, workflows, credentials, decisions)
 2. **CLAUDE.md** — update with any new triggers, workflows, or project notes
 3. **GitHub (my-website)** — stage and push any uncommitted changes to main
-4. **GitHub config backup** — push `~/.claude.json` to `walker-agm/claude-config-backup` private repo so tokens and MCP config are saved
+4. **GitHub config backup** — push `~/.claude.json` AND the latest MEMORY.md to `walker-agm/claude-config-backup` private repo so everything is available on any device
+5. **API tokens** — if any new tokens/keys were created this session, confirm they are saved in `~/.claude.json` and pushed to config backup
 
 **Client Pipeline**
-5. **DocuSeal** — check for any submissions where Walker hasn't signed yet (stuck before client receives it)
-6. **Stripe open invoices** — flag any open invoices older than 7 days that may have slipped through
-7. **Stripe subscriptions** — check for any failed or canceled subscription payments
-8. **HubSpot** — check open deals by stage, flag any that haven't moved in 7+ days
-9. **Calendly** — check for any upcoming meetings in the next 48 hours to prep for
+6. **DocuSeal** — check for any submissions where Walker hasn't signed yet (stuck before client receives it)
+7. **Stripe open invoices** — flag any open invoices older than 7 days that may have slipped through
+8. **Stripe subscriptions** — check for any failed or canceled subscription payments
+9. **HubSpot** — check open deals by stage, flag any that haven't moved in 7+ days
+10. **Calendly** — check for any upcoming meetings in the next 48 hours to prep for
 
 **Sites & Code**
-10. **Vercel** — check latest deployment status for main site AND all client projects, flag any failures
-11. **Sentry** — check for any new unresolved errors across all projects
-12. **Cloudflare Workers** — confirm apex-morning-digest cron is active and last run was successful
-13. **Resend** — check for any bounced or failed emails in the last 24 hours
+11. **Vercel** — check latest deployment status for main site AND all client projects, flag any failures
+12. **Sentry** — check for any new unresolved errors across all projects
+13. **Cloudflare Workers** — confirm apex-morning-digest cron is active and healthy
+14. **Resend** — check for any bounced or failed emails in the last 24 hours
 
 **Content & SEO**
-14. **Sanity** — check for unpublished blog drafts, flag if behind on 2x/week posting schedule
-15. **GSC** — if it's been 7+ days since last pull, fetch fresh keyword data and flag quick wins (positions 5-20)
+15. **Sanity** — check for unpublished blog drafts, flag if behind on 2x/week posting schedule
+16. **GSC** — if it's been 7+ days since last pull, fetch fresh keyword data and flag quick wins (positions 5-20)
 
 **Onboarding**
-16. **Jotform** — remind Walker to check for any new onboarding form submissions that need to be actioned
+17. **Jotform** — remind Walker to check for any new onboarding form submissions that need to be actioned
 
 ## Client Workflow Triggers — AUTO-RUN WHEN TRIGGERED
 
