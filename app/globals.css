@@ -70,3 +70,7 @@ html {
   50%      { transform: translateY(6px); }
 }
 .scroll-bounce { animation: scrollBounce 1.6s ease-in-out infinite; }
+
+/* ─── Hide Scrollbar ─────────────────────────────────────────── */
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
