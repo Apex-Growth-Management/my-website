@@ -16,9 +16,24 @@ html {
   scroll-behavior: smooth;
 }
 
+/* ─── Custom Scrollbar ──────────────────────────────────────────── */
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #1d4ed8; border-radius: 99px; }
+::-webkit-scrollbar-thumb:hover { background: #2563eb; }
+
+/* ─── Grid Pattern Overlay ──────────────────────────────────────── */
+.grid-overlay {
+  background-image:
+    linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+
+/* ─── Animated Gradient Text ────────────────────────────────────── */
 @keyframes gradient-shift {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
   100% { background-position: 0% 50%; }
 }
 
@@ -26,3 +41,32 @@ html {
   background-size: 300% 300%;
   animation: gradient-shift 5s ease infinite;
 }
+
+/* ─── Infinite Marquee ──────────────────────────────────────────── */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+.animate-marquee {
+  animation: marquee 35s linear infinite;
+  will-change: transform;
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+
+/* ─── Badge Dot Pulse ───────────────────────────────────────────── */
+@keyframes badgePulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%      { opacity: 0.4; transform: scale(0.8); }
+}
+.badge-dot { animation: badgePulse 2s ease-in-out infinite; }
+
+/* ─── Scroll Indicator Bounce ───────────────────────────────────── */
+@keyframes scrollBounce {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(6px); }
+}
+.scroll-bounce { animation: scrollBounce 1.6s ease-in-out infinite; }

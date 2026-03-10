@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
+import ScrollProgress from "@/components/ScrollProgress";
 import LocalBusinessSchema from "@/components/LocalBusinessSchema";
 import Script from "next/script";
 
@@ -85,6 +86,7 @@ export default function RootLayout({
         </Script>
       </head>
       <body className={`${geist.variable} antialiased bg-black text-white`}>
+        <ScrollProgress />
         <Navbar />
         {children}
       </body>
