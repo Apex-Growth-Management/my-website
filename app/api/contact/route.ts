@@ -1,11 +1,50 @@
 import { Resend } from "resend";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 const ZAPIER_WEBHOOK = "https://hooks.zapier.com/hooks/catch/26639307/u0709gu/";
 
-export async function POST(req: Request) {
-  const { firstName, lastName, email, business, service, message } = await req.json();
+// ── Rate limiting (5 submissions per IP per minute) ──────────────────────────
+const rateMap = new Map<string, number[]>();
+const WINDOW = 60_000;
+const LIMIT = 5;
+
+function isRateLimited(ip: string): boolean {
+  const now = Date.now();
+  const hits = (rateMap.get(ip) ?? []).filter((t) => now - t < WINDOW);
+  if (hits.length >= LIMIT) return true;
+  rateMap.set(ip, [...hits, now]);
+  return false;
+}
+
+// ── Input helpers ─────────────────────────────────────────────────────────────
+function clean(val: unknown, max: number): string {
+  return typeof val === "string" ? val.trim().slice(0, max).replace(/[<>]/g, "") : "";
+}
+function validEmail(e: string): boolean {
+  return e.length <= 254 && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e);
+}
+
+export async function POST(req: NextRequest) {
+  // Rate limit
+  const ip = req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ?? "unknown";
+  if (isRateLimited(ip)) {
+    return NextResponse.json({ error: "Too many requests" }, { status: 429 });
+  }
+
+  const body = await req.json();
+
+  // Validate & sanitize
+  const firstName = clean(body.firstName, 100);
+  const lastName  = clean(body.lastName,  100);
+  const email     = clean(body.email,     254);
+  const business  = clean(body.business,  200);
+  const service   = clean(body.service,   100);
+  const message   = clean(body.message,  2000);
+
+  if (!firstName || !lastName || !validEmail(email)) {
+    return NextResponse.json({ error: "Invalid input" }, { status: 400 });
+  }
 
   // Send email via Resend
   const { error } = await resend.emails.send({
