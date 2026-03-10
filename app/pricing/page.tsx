@@ -63,7 +63,7 @@ export default function PricingPage() {
           <h1 className="text-4xl md:text-6xl font-extrabold mb-4">Simple, Transparent Pricing</h1>
           <p className="text-gray-500 text-lg max-w-xl mx-auto mb-8">No hidden fees. Pay once to build, then a monthly retainer to grow.</p>
           <a
-            href="https://calendly.com/admin-apexgrowthmanagement/30min"
+            href="https://calendly.com/apexgrowthmanagement"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 bg-gray-900 hover:bg-gray-800 text-white font-semibold px-6 py-3 rounded-full transition-colors text-sm"

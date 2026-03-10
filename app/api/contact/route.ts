@@ -112,7 +112,7 @@ export async function POST(req: NextRequest) {
           <p style="margin:0 0 16px;font-size:15px;color:#374151;">Prefer to talk through it? Book a free 15-minute call at a time that works for you.</p>
           <table cellpadding="0" cellspacing="0" style="margin-bottom:32px;">
             <tr><td style="background-color:#2563eb;border-radius:50px;">
-              <a href="https://calendly.com/admin-apexgrowthmanagement/30min" style="display:inline-block;padding:14px 28px;font-size:15px;font-weight:600;color:#ffffff;text-decoration:none;">Book a Free Call →</a>
+              <a href="https://calendly.com/apexgrowthmanagement" style="display:inline-block;padding:14px 28px;font-size:15px;font-weight:600;color:#ffffff;text-decoration:none;">Book a Free Call →</a>
             </td></tr>
           </table>
 

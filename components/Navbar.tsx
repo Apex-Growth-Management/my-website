@@ -56,7 +56,7 @@ export default function Navbar() {
             </Link>
           ))}
           <a
-            href="https://calendly.com/admin-apexgrowthmanagement/30min"
+            href="https://calendly.com/apexgrowthmanagement"
             target="_blank"
             rel="noopener noreferrer"
             className="text-blue-400 hover:text-blue-300 transition-colors font-semibold"
@@ -107,7 +107,7 @@ export default function Navbar() {
             </Link>
           ))}
           <a
-            href="https://calendly.com/admin-apexgrowthmanagement/30min"
+            href="https://calendly.com/apexgrowthmanagement"
             target="_blank"
             rel="noopener noreferrer"
             onClick={() => setOpen(false)}

@@ -182,7 +182,7 @@ export default function AuditPage() {
               Get in Touch <ArrowRight className="w-4 h-4" />
             </Link>
             <a
-              href="https://calendly.com/admin-apexgrowthmanagement/30min"
+              href="https://calendly.com/apexgrowthmanagement"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center gap-2 border border-gray-200 hover:border-gray-300 text-gray-700 font-semibold px-7 py-4 rounded-full transition-colors"

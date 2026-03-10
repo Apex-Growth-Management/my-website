@@ -38,7 +38,7 @@ export default function StickyCTA() {
             </div>
             <div className="flex items-center gap-2 shrink-0">
               <a
-                href="https://calendly.com/admin-apexgrowthmanagement/30min"
+                href="https://calendly.com/apexgrowthmanagement"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-1.5 bg-blue-600 hover:bg-blue-500 text-white text-sm font-semibold px-4 py-2 rounded-full transition-colors"

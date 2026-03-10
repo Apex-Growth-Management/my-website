@@ -88,7 +88,7 @@ export default function Home() {
             </MagneticButton>
             <MagneticButton>
               <a
-                href="https://calendly.com/admin-apexgrowthmanagement/30min"
+                href="https://calendly.com/apexgrowthmanagement"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="block border border-white/30 hover:border-white/70 hover:bg-white/10 text-white/80 hover:text-white font-semibold px-8 py-4 rounded-full text-lg transition-all duration-200"
@@ -410,7 +410,7 @@ export default function Home() {
             </MagneticButton>
             <MagneticButton>
               <a
-                href="https://calendly.com/admin-apexgrowthmanagement/30min"
+                href="https://calendly.com/apexgrowthmanagement"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="block border border-white/30 hover:border-white/60 hover:bg-white/10 text-white/80 hover:text-white font-semibold px-10 py-4 rounded-full text-lg transition-all duration-200"

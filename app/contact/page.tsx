@@ -153,7 +153,7 @@ export default function ContactPage() {
               Tell us about your project — takes less than 2 minutes.
             </p>
             <a
-              href="https://calendly.com/admin-apexgrowthmanagement/30min"
+              href="https://calendly.com/apexgrowthmanagement"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 bg-gray-900 hover:bg-gray-800 text-white font-semibold px-6 py-3 rounded-full transition-colors text-sm"
