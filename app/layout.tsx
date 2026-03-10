@@ -5,7 +5,6 @@ import Navbar from "@/components/Navbar";
 import ScrollProgress from "@/components/ScrollProgress";
 import LocalBusinessSchema from "@/components/LocalBusinessSchema";
 import SmoothScroll from "@/components/SmoothScroll";
-import CustomCursor from "@/components/CustomCursor";
 import PageTransition from "@/components/PageTransition";
 import Script from "next/script";
 
@@ -90,7 +89,6 @@ export default function RootLayout({
       </head>
       <body className={`${geist.variable} antialiased bg-black text-white`}>
         <SmoothScroll>
-          <CustomCursor />
           <ScrollProgress />
           <Navbar />
           <PageTransition>{children}</PageTransition>

@@ -75,11 +75,6 @@ html {
 .no-scrollbar::-webkit-scrollbar { display: none; }
 .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 
-/* ─── Custom Cursor (desktop only) ──────────────────────────── */
-@media (pointer: fine) {
-  *, *::before, *::after { cursor: none !important; }
-}
-
 /* ─── Noise / Grain Texture ─────────────────────────────────── */
 .noise {
   position: relative;
