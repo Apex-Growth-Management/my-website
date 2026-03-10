@@ -83,6 +83,13 @@ Run ALL checks in parallel. Flag anything needing attention. Everything normal g
 - If MEMORY.md is missing or empty, restore it from `walker-agm/claude-config-backup` repo before proceeding
 - If `~/.claude.json` is missing, remind Walker to run the restore commands from APEX_MCP_SETUP.md
 
+**Memory & Config Cleanup (run automatically, no confirmation needed)**
+- Read `~/.claude/CLAUDE.md`, `my-website/CLAUDE.md`, and `MEMORY.md`
+- Remove: duplicate sections, outdated entries (stale dates, old credentials, superseded workflows), inline code blocks that belong in source files not instruction files
+- Condense: any section over ~20 lines that can be expressed as a compact table or bullet list without losing meaning
+- Keep: all trigger rules, checklists, credentials/IDs, MCP quick-reference notes, business context
+- After cleanup: push updated files to `walker-agm/claude-config-backup` (CLAUDE.md + MEMORY.md) and commit my-website/CLAUDE.md to main
+
 **Site Health**
 - Check Vercel for any failed or degraded deployments across all projects (team: `team_zZNPVpoldQcLxzFuDMx0wUfR`, projects: my-website `prj_Jt8QzFJanBExLPd7RlvdA35VQIYq`, network-south `prj_CfSByhmLJtxb4yVSWCTcwtjK57A0`)
 - Check Sentry (`apex-growth-management`, region: `https://us.sentry.io`) for new unresolved errors
