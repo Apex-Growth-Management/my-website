@@ -59,13 +59,13 @@ export default function Navbar() {
             href="https://calendly.com/admin-apexgrowthmanagement/30min"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-white/60 hover:text-white transition-colors"
+            className="text-blue-400 hover:text-blue-300 transition-colors font-semibold"
           >
             Book a Call
           </a>
           <Link
             href="/audit"
-            className="border border-blue-400/60 text-blue-300 hover:border-blue-400 hover:text-blue-200 px-5 py-2 rounded-full text-sm font-medium transition-all"
+            className="text-blue-400 hover:text-blue-300 transition-colors font-semibold"
           >
             Free Audit
           </Link>
@@ -111,14 +111,14 @@ export default function Navbar() {
             target="_blank"
             rel="noopener noreferrer"
             onClick={() => setOpen(false)}
-            className="text-white/60 hover:text-white transition-colors"
+            className="text-blue-400 hover:text-blue-300 transition-colors font-semibold"
           >
             Book a Call
           </a>
           <Link
             href="/audit"
             onClick={() => setOpen(false)}
-            className="border border-blue-400/60 text-blue-300 px-5 py-2 rounded-full text-center transition-colors hover:border-blue-400 hover:text-blue-200"
+            className="text-blue-400 hover:text-blue-300 transition-colors font-semibold"
           >
             Free Audit
           </Link>
