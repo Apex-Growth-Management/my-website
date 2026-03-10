@@ -55,6 +55,12 @@ export default function Navbar() {
               {link.label}
             </Link>
           ))}
+          <Link
+            href="/audit"
+            className="text-blue-400 hover:text-blue-300 transition-colors font-semibold"
+          >
+            Free Audit
+          </Link>
           <a
             href="https://calendly.com/admin-apexgrowthmanagement/30min"
             target="_blank"
@@ -100,6 +106,13 @@ export default function Navbar() {
               {link.label}
             </Link>
           ))}
+          <Link
+            href="/audit"
+            onClick={() => setOpen(false)}
+            className="text-blue-400 hover:text-blue-300 transition-colors font-semibold"
+          >
+            Free Audit
+          </Link>
           <a
             href="https://calendly.com/admin-apexgrowthmanagement/30min"
             target="_blank"

@@ -6,6 +6,7 @@ import ScrollProgress from "@/components/ScrollProgress";
 import LocalBusinessSchema from "@/components/LocalBusinessSchema";
 import SmoothScroll from "@/components/SmoothScroll";
 import PageTransition from "@/components/PageTransition";
+import StickyCTA from "@/components/StickyCTA";
 import Script from "next/script";
 
 const geist = Geist({
@@ -92,6 +93,7 @@ export default function RootLayout({
           <ScrollProgress />
           <Navbar />
           <PageTransition>{children}</PageTransition>
+          <StickyCTA />
         </SmoothScroll>
       </body>
     </html>
