@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform, MotionValue } from "framer-motion";
 
 const templates = [
   {
@@ -33,6 +33,33 @@ const accentColors: Record<string, string> = {
   blue: "bg-blue-500",
 };
 
+// Sub-component to avoid hooks-in-loop
+function ProgressDot({
+  scrollYProgress,
+  index,
+}: {
+  scrollYProgress: MotionValue<number>;
+  index: number;
+}) {
+  const total = templates.length;
+  const scaleX = useTransform(
+    scrollYProgress,
+    [index / total, (index + 1) / total],
+    [0, 1]
+  );
+  return (
+    <div
+      className="h-1 rounded-full bg-white/25 overflow-hidden"
+      style={{ width: 32 }}
+    >
+      <motion.div
+        className="h-full bg-blue-500 rounded-full"
+        style={{ scaleX, transformOrigin: "left" }}
+      />
+    </div>
+  );
+}
+
 export default function HorizontalScroll() {
   const containerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
@@ -40,24 +67,17 @@ export default function HorizontalScroll() {
     offset: ["start start", "end end"],
   });
 
-  // Translate the strip: 0% → -66.667% (showing card 1 → card 3)
   const x = useTransform(scrollYProgress, [0, 1], ["0%", "-66.667%"]);
 
   return (
-    <div
-      ref={containerRef}
-      className="relative bg-gray-950"
-      style={{ height: "280vh" }}
-    >
+    <div ref={containerRef} className="relative bg-gray-950" style={{ height: "220vh" }}>
       <div className="sticky top-0 h-screen overflow-hidden flex items-center">
-        <motion.div
-          className="flex"
-          style={{ x, width: "300%" }}
-        >
+        {/* Horizontal strip */}
+        <motion.div className="flex" style={{ x, width: "300%", willChange: "transform" }}>
           {templates.map((t) => (
             <div
               key={t.name}
-              className="flex items-center justify-center px-8 md:px-16"
+              className="flex items-center justify-center px-8 md:px-20"
               style={{ width: "100vw" }}
             >
               <a
@@ -68,7 +88,6 @@ export default function HorizontalScroll() {
               >
                 {/* Browser chrome */}
                 <div className="rounded-xl overflow-hidden border border-white/10 group-hover:border-blue-500/40 transition-all duration-300 shadow-2xl shadow-black/60">
-                  {/* Title bar */}
                   <div className="bg-gray-800 px-4 py-2.5 flex items-center gap-1.5">
                     <div className="w-2.5 h-2.5 rounded-full bg-red-400/60" />
                     <div className="w-2.5 h-2.5 rounded-full bg-yellow-400/60" />
@@ -79,19 +98,15 @@ export default function HorizontalScroll() {
                       </span>
                     </div>
                   </div>
-                  {/* Screenshot */}
-                  <div className="relative overflow-hidden" style={{ height: "420px" }}>
+                  <div className="relative overflow-hidden" style={{ height: "400px" }}>
                     <img
                       src={t.screenshot}
                       alt={`${t.name} website`}
                       className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700"
                     />
-                    <div
-                      className={`absolute bottom-0 left-0 right-0 h-0.5 ${accentColors[t.accent]}`}
-                    />
+                    <div className={`absolute bottom-0 left-0 right-0 h-0.5 ${accentColors[t.accent]}`} />
                   </div>
                 </div>
-                {/* Label */}
                 <div className="mt-6 text-center">
                   <p className="text-white font-semibold text-lg group-hover:text-blue-400 transition-colors duration-200">
                     {t.name}
@@ -103,26 +118,10 @@ export default function HorizontalScroll() {
           ))}
         </motion.div>
 
-        {/* Progress dots */}
+        {/* Progress dots — sub-components avoid hooks-in-loop */}
         <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-2 z-10">
           {templates.map((t, i) => (
-            <motion.div
-              key={t.name}
-              className="h-1 rounded-full bg-white/30 overflow-hidden"
-              style={{ width: i === 0 ? 24 : 8 }}
-            >
-              <motion.div
-                className="h-full bg-blue-500 rounded-full"
-                style={{
-                  scaleX: useTransform(
-                    scrollYProgress,
-                    [i / 3, (i + 1) / 3],
-                    [0, 1]
-                  ),
-                  transformOrigin: "left",
-                }}
-              />
-            </motion.div>
+            <ProgressDot key={t.name} scrollYProgress={scrollYProgress} index={i} />
           ))}
         </div>
       </div>
