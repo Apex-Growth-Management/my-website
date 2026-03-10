@@ -2,55 +2,60 @@
 
 import { useRef } from "react";
 import { motion, useScroll, useTransform, MotionValue } from "framer-motion";
+import { Zap, Layers, TrendingUp, Headphones } from "lucide-react";
 
 const features = [
   {
-    icon: "⚡",
+    Icon: Zap,
     tag: "Performance",
     title: "Lightning Fast",
     desc: "Sub-second load times with Next.js and a global CDN. Google rewards fast sites with higher rankings — your competitors won't know what hit them.",
     stat: "< 1s",
     statLabel: "typical load time",
-    color: "from-yellow-500/15 to-amber-600/8",
-    border: "border-yellow-500/20",
+    iconBg: "bg-yellow-500/15 border-yellow-500/25",
+    iconColor: "text-yellow-400",
     tagColor: "text-yellow-400 bg-yellow-400/10 border-yellow-400/20",
+    accentBar: "bg-yellow-500/40",
   },
   {
-    icon: "🎨",
+    Icon: Layers,
     tag: "Design",
     title: "100% Custom",
     desc: "No templates, no drag-and-drop builders, no compromises. Every pixel is crafted specifically for your brand to convert visitors into paying customers.",
     stat: "0",
     statLabel: "cookie-cutter templates used",
-    color: "from-blue-500/15 to-cyan-600/8",
-    border: "border-blue-500/20",
+    iconBg: "bg-blue-500/15 border-blue-500/25",
+    iconColor: "text-blue-400",
     tagColor: "text-blue-400 bg-blue-400/10 border-blue-400/20",
+    accentBar: "bg-blue-500/40",
   },
   {
-    icon: "📈",
+    Icon: TrendingUp,
     tag: "SEO",
     title: "Built to Rank",
     desc: "Schema markup, optimized metadata, Core Web Vitals, and local SEO signals baked in from line one. We build sites the way Google wants to see them.",
     stat: "Top 10",
     statLabel: "where we aim to get you",
-    color: "from-green-500/15 to-emerald-600/8",
-    border: "border-green-500/20",
+    iconBg: "bg-green-500/15 border-green-500/25",
+    iconColor: "text-green-400",
     tagColor: "text-green-400 bg-green-400/10 border-green-400/20",
+    accentBar: "bg-green-500/40",
   },
   {
-    icon: "🛠️",
+    Icon: Headphones,
     tag: "Support",
     title: "We Stay On",
     desc: "We're your web team — not a one-and-done agency. Need a change? Message us. Most updates are live within 24 hours, no tickets or queues.",
     stat: "24hr",
     statLabel: "typical turnaround for updates",
-    color: "from-purple-500/15 to-violet-600/8",
-    border: "border-purple-500/20",
+    iconBg: "bg-purple-500/15 border-purple-500/25",
+    iconColor: "text-purple-400",
     tagColor: "text-purple-400 bg-purple-400/10 border-purple-400/20",
+    accentBar: "bg-purple-500/40",
   },
 ];
 
-// Each panel is its own component so useTransform isn't called in a loop
+// Each panel fades in then fades out as the next one arrives — no stacking
 function FeaturePanel({
   feature,
   progress,
@@ -62,59 +67,81 @@ function FeaturePanel({
   index: number;
   total: number;
 }) {
-  const entryStart = index === 0 ? 0 : (index / total) * 0.85;
-  const entryEnd = index === 0 ? 0.001 : Math.min(entryStart + 0.15, 1);
+  const step = 1 / total; // 0.25
+  const fade = 0.07;
 
-  const opacity = useTransform(
-    progress,
-    [entryStart, entryEnd],
-    [index === 0 ? 1 : 0, 1]
-  );
-  const y = useTransform(
-    progress,
-    [entryStart, entryEnd],
-    [index === 0 ? 0 : 50, 0]
-  );
+  const isFirst = index === 0;
+  const isLast = index === total - 1;
+
+  // Entry window
+  const eS = isFirst ? 0 : index * step - fade;
+  const eE = isFirst ? 0.001 : index * step + fade;
+
+  // Exit window (start of next feature's entry)
+  const xS = (index + 1) * step - fade;
+  const xE = (index + 1) * step + fade;
+
+  // Build multi-keypoint opacity: fade in → hold → fade out
+  const opacityInput = isFirst
+    ? isLast ? [0, 1] : [0, xS, xE]
+    : isLast
+    ? [eS, eE, 1]
+    : [eS, eE, xS, xE];
+
+  const opacityOutput = isFirst
+    ? isLast ? [1, 1] : [1, 1, 0]
+    : isLast
+    ? [0, 1, 1]
+    : [0, 1, 1, 0];
+
+  const opacity = useTransform(progress, opacityInput, opacityOutput);
+  const y = useTransform(progress, [eS, eE], [isFirst ? 0 : 28, 0]);
+
+  const { Icon } = feature;
 
   return (
     <motion.div
-      style={{ opacity, y, zIndex: index + 1 }}
+      style={{ opacity, y }}
       className="absolute inset-0 flex items-center justify-center px-6"
     >
-      <div
-        className={`w-full max-w-2xl bg-gradient-to-br ${feature.color} border ${feature.border} rounded-2xl p-8 md:p-10 backdrop-blur-sm`}
-      >
-        <div
-          className={`inline-flex items-center gap-1.5 text-xs font-semibold px-3 py-1 rounded-full border mb-5 ${feature.tagColor}`}
-        >
-          {feature.tag}
-        </div>
+      <div className="w-full max-w-2xl bg-gray-900 border border-white/8 rounded-2xl overflow-hidden shadow-2xl shadow-black/50">
+        {/* Top accent bar */}
+        <div className={`h-1 w-full ${feature.accentBar}`} />
 
-        <div className="flex items-start gap-5 mb-6">
-          <div className="text-5xl shrink-0">{feature.icon}</div>
-          <div>
-            <h3 className="text-2xl md:text-3xl font-bold text-white mb-3">
-              {feature.title}
-            </h3>
-            <p className="text-gray-400 text-base md:text-lg leading-relaxed">
-              {feature.desc}
-            </p>
+        <div className="p-8 md:p-10">
+          {/* Icon + tag row */}
+          <div className="flex items-center gap-4 mb-6">
+            <div className={`w-12 h-12 rounded-xl border flex items-center justify-center shrink-0 ${feature.iconBg}`}>
+              <Icon className={`w-5 h-5 ${feature.iconColor}`} />
+            </div>
+            <span className={`text-xs font-semibold px-3 py-1 rounded-full border ${feature.tagColor}`}>
+              {feature.tag}
+            </span>
           </div>
-        </div>
 
-        <div className="border-t border-white/10 pt-5 flex items-baseline gap-3">
-          <span className="text-3xl font-extrabold text-white font-mono">
-            {feature.stat}
-          </span>
-          <span className="text-gray-500 text-sm">{feature.statLabel}</span>
+          {/* Title + description */}
+          <h3 className="text-2xl md:text-3xl font-bold text-white mb-4">
+            {feature.title}
+          </h3>
+          <p className="text-gray-400 text-base md:text-lg leading-relaxed mb-8">
+            {feature.desc}
+          </p>
+
+          {/* Stat */}
+          <div className="flex items-baseline gap-3 border-t border-white/8 pt-6">
+            <span className="text-4xl font-extrabold text-white font-mono tracking-tight">
+              {feature.stat}
+            </span>
+            <span className="text-gray-500 text-sm">{feature.statLabel}</span>
+          </div>
         </div>
       </div>
     </motion.div>
   );
 }
 
-// Sub-component for progress bars — avoids hooks-in-loop
-function ProgressBar({
+// Sub-component for progress indicator — no hooks in loop
+function ProgressPip({
   progress,
   index,
   total,
@@ -123,21 +150,17 @@ function ProgressBar({
   index: number;
   total: number;
 }) {
-  const scaleY = useTransform(
+  const step = 1 / total;
+  const active = useTransform(
     progress,
-    [
-      index === 0 ? 0 : (index / total) * 0.85,
-      Math.min(((index + 1) / total) * 0.85, 1),
-    ],
-    [index === 0 ? 1 : 0, 1]
+    [index * step, index * step + 0.01],
+    [0.3, 1]
   );
   return (
-    <div className="w-1 rounded-full bg-white/15 overflow-hidden" style={{ height: 20 }}>
-      <motion.div
-        className="w-full rounded-full bg-blue-500"
-        style={{ scaleY, transformOrigin: "top" }}
-      />
-    </div>
+    <motion.div
+      style={{ opacity: active }}
+      className="w-1.5 h-1.5 rounded-full bg-white"
+    />
   );
 }
 
@@ -148,16 +171,15 @@ export default function CascadeFeatures() {
     offset: ["start start", "end end"],
   });
 
-  const headerOpacity = useTransform(scrollYProgress, [0, 0.15], [1, 0]);
-  const hintOpacity = useTransform(scrollYProgress, [0, 0.1], [1, 0]);
+  const headerOpacity = useTransform(scrollYProgress, [0, 0.14], [1, 0]);
+  const hintOpacity = useTransform(scrollYProgress, [0, 0.09], [1, 0]);
 
   return (
-    // 200vh: enough for a satisfying cascade without being exhausting
     <div ref={ref} className="relative bg-gray-950" style={{ height: "200vh" }}>
       <div className="sticky top-0 h-screen overflow-hidden">
-        <div className="absolute inset-0 grid-overlay opacity-60" />
+        <div className="absolute inset-0 grid-overlay opacity-50" />
 
-        {/* Section label */}
+        {/* Section header */}
         <motion.div
           style={{ opacity: headerOpacity }}
           className="absolute top-16 left-0 right-0 text-center z-20 pointer-events-none"
@@ -178,9 +200,9 @@ export default function CascadeFeatures() {
           Scroll to explore
         </motion.div>
 
-        {/* Feature panels */}
+        {/* Feature panels — crossfade, not stack */}
         <div className="absolute inset-0 flex items-center justify-center">
-          <div className="relative w-full" style={{ height: "70vh" }}>
+          <div className="relative w-full" style={{ height: "72vh" }}>
             {features.map((feature, i) => (
               <FeaturePanel
                 key={feature.title}
@@ -193,10 +215,10 @@ export default function CascadeFeatures() {
           </div>
         </div>
 
-        {/* Progress bars — sub-components, no hooks-in-loop */}
-        <div className="absolute bottom-8 right-8 z-20 flex flex-col gap-2">
+        {/* Progress pips */}
+        <div className="absolute bottom-8 right-8 z-20 flex flex-col gap-2.5">
           {features.map((f, i) => (
-            <ProgressBar
+            <ProgressPip
               key={f.title}
               progress={scrollYProgress}
               index={i}
