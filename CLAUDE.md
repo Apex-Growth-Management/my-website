@@ -101,11 +101,23 @@ Run ALL checks in parallel. Flag anything needing attention. Everything normal g
 
 **Business Updates Since Last Session**
 - HubSpot — any new leads, deal stage changes, or deals stuck 7+ days (filter: dealstage NOT IN closedwon/closedlost). **Specifically flag any contacts where notes/message contain "FREE AUDIT REQUEST"** — these came from /audit page and are high-intent, call same day.
-- Stripe — any open invoices (skip customer `cus_U7AJLJVrq1FIhA`), failed charges, or canceled subscriptions
+- Stripe — run `list_subscriptions` and categorize every subscriber (skip `cus_U7AJLJVrq1FIhA`):
+  - **Active**: status `active` → list name, plan, amount
+  - **Overdue**: status `past_due` → list name, plan, amount, days overdue — flag for follow-up
+  - **Inactive**: status `canceled` → list name, plan, cancel date
+  - Also check: open invoices, failed charges
+  - Present as a formatted table grouped by category
 - DocuSeal — any submissions stuck waiting for Walker to sign
 - Calendly — meetings today or tomorrow; always pass `user_uri: https://api.calendly.com/users/f18af646-35d0-4de9-99a7-3247a541f8d0`
 - Gmail (`mcp__claude_ai_Gmail__gmail_search_messages`) — unread inbox emails, filter: `is:unread in:inbox -category:promotions -category:social`
 - Resend — no MCP for delivery logs; skip unless Walker reports bounce issues
+
+**Cold Call Lists** (data in `~/cold-call-tracker.json`)
+- **Callbacks Due Today**: Read `callbacks` array, show any with `date` today or overdue. Show: name, phone, reason, days since callback was scheduled. Flag overdue in red.
+- **Do Not Call**: Read `do_not_call` array. Report count (e.g., "12 contacts on DNC list"). When building call lists via Apify, cross-reference and exclude matches.
+
+**Onboarding Follow-Up** (data in `~/cold-call-tracker.json`)
+- **Paid but No Jotform**: Read `jotform_status` array for entries where `completed = false`. Flag anyone who paid 3+ days ago. If 5+ days, auto-draft a reminder email via Resend with the Jotform link (https://www.jotform.com/form/260581311492049).
 
 **Content & SEO**
 - Sanity blog — query project `g1hic8ei` / dataset `production`: `*[_type == "post"] | order(publishedAt desc)[0..2]{title, publishedAt}` — show count + last 2 posts, flag if behind 2x/week schedule
