@@ -12,6 +12,7 @@ import Script from "next/script";
 const geist = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
+  display: "swap",
 });
 
 const siteUrl = "https://apexgrowthmanagement.com";

@@ -1,3 +1,4 @@
+import Image from "next/image";
 import UptimeBadge from "@/components/UptimeBadge";
 
 const instagramSvg = (
@@ -10,7 +11,7 @@ export default function Footer() {
   return (
     <footer className="bg-gray-900 py-10 px-6 text-center text-sm">
       <div className="flex justify-center mb-4">
-        <img src="/logo.png" alt="Apex Growth Management" className="h-12 brightness-0 invert" style={{ objectFit: "contain" }} />
+        <Image src="/logo.png" alt="Apex Growth Management" width={144} height={48} className="h-12 w-auto brightness-0 invert" />
       </div>
       <p className="text-white/60 text-sm mb-3">Raleigh, NC</p>
       <div className="flex flex-col sm:flex-row items-center justify-center gap-3 text-white/50">

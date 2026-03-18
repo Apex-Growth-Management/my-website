@@ -27,7 +27,7 @@ export default function AboutPage() {
     <main className="bg-white text-gray-900 pt-24 min-h-screen">
       {/* Hero */}
       <section className="relative py-32 px-6 overflow-hidden">
-        <Image src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=1920&q=80&fit=crop" alt="Laptop and workspace" fill className="object-cover" />
+        <Image src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=1920&q=80&fit=crop" alt="Laptop and workspace" fill sizes="100vw" className="object-cover" priority />
         <div className="absolute inset-0 bg-black/78" />
         <motion.div
           className="relative z-10 max-w-4xl mx-auto text-center text-white"
@@ -67,7 +67,7 @@ export default function AboutPage() {
             whileInView="visible"
             viewport={{ once: true }}
           >
-            <Image src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800&q=80&fit=crop" alt="Code on screen" fill className="object-cover" />
+            <Image src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800&q=80&fit=crop" alt="Code on screen" fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover" loading="lazy" />
           </motion.div>
         </div>
       </section>
@@ -140,7 +140,7 @@ export default function AboutPage() {
 
       {/* Photo quote banner */}
       <section className="relative h-64 overflow-hidden">
-        <Image src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1920&q=80&fit=crop" alt="Working on laptop" fill className="object-cover" />
+        <Image src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1920&q=80&fit=crop" alt="Working on laptop" fill sizes="100vw" className="object-cover" loading="lazy" />
         <div className="absolute inset-0 bg-black/75 flex items-center justify-center">
           <motion.p
             className="text-2xl md:text-4xl font-extrabold text-center text-white max-w-xl px-6"

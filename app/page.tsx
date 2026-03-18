@@ -52,6 +52,7 @@ export default function Home() {
             src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1920&q=80&fit=crop"
             alt="Web design workspace"
             fill
+            sizes="100vw"
             className="object-cover"
             priority
           />
@@ -405,7 +406,9 @@ export default function Home() {
           src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=1920&q=80&fit=crop"
           alt="Modern office"
           fill
+          sizes="100vw"
           className="object-cover"
+          loading="lazy"
         />
         <div className="absolute inset-0 bg-black/82" />
         <div className="absolute inset-0 grid-overlay opacity-50" />
