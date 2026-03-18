@@ -15,11 +15,13 @@ import TiltCard from "@/components/TiltCard";
 import TypewriterText from "@/components/TypewriterText";
 import SlotCounter from "@/components/SlotCounter";
 import ScrollRevealText from "@/components/ScrollRevealText";
-import HorizontalScroll from "@/components/HorizontalScroll";
-import CascadeFeatures from "@/components/CascadeFeatures";
+import dynamic from "next/dynamic";
 import HeroParticles from "@/components/HeroParticles";
 import ScrambleText from "@/components/ScrambleText";
-import LatestPosts from "@/components/LatestPosts";
+
+const HorizontalScroll = dynamic(() => import("@/components/HorizontalScroll"), { ssr: false });
+const CascadeFeatures = dynamic(() => import("@/components/CascadeFeatures"), { ssr: false });
+const LatestPosts = dynamic(() => import("@/components/LatestPosts"), { ssr: false });
 import { Gauge } from "lucide-react";
 
 const services = [

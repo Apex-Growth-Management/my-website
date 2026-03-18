@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef } from "react";
+import Image from "next/image";
 import { motion, useScroll, useTransform, MotionValue } from "framer-motion";
 
 const templates = [
@@ -99,10 +100,12 @@ export default function HorizontalScroll() {
                     </div>
                   </div>
                   <div className="relative overflow-hidden" style={{ height: "400px" }}>
-                    <img
+                    <Image
                       src={t.screenshot}
                       alt={`${t.name} website`}
-                      className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700"
+                      fill
+                      sizes="(max-width: 768px) 100vw, 672px"
+                      className="object-cover object-top group-hover:scale-105 transition-transform duration-700"
                     />
                     <div className={`absolute bottom-0 left-0 right-0 h-0.5 ${accentColors[t.accent]}`} />
                   </div>

@@ -26,19 +26,21 @@ export default function HeroParticles() {
     let animId: number;
     const particles: Particle[] = [];
 
-    const resize = () => {
-      canvas.width = canvas.offsetWidth;
-      canvas.height = canvas.offsetHeight;
-    };
-    resize();
-
-    const ro = new ResizeObserver(resize);
+    // Use ResizeObserver contentRect to avoid forced synchronous reflow
+    const ro = new ResizeObserver((entries) => {
+      const entry = entries[0];
+      if (!entry) return;
+      canvas.width = entry.contentRect.width;
+      canvas.height = entry.contentRect.height;
+    });
     ro.observe(canvas);
 
+    // Seed particles after first paint using rAF (dimensions available by then)
+    requestAnimationFrame(() => {
     for (let i = 0; i < COUNT; i++) {
       particles.push({
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height,
+        x: Math.random() * (canvas.width || 300),
+        y: Math.random() * (canvas.height || 300),
         vx: (Math.random() - 0.5) * 0.3,
         vy: (Math.random() - 0.5) * 0.3,
         radius: Math.random() * 1.2 + 0.4,
@@ -80,6 +82,7 @@ export default function HeroParticles() {
       animId = requestAnimationFrame(draw);
     };
     draw();
+    }); // end rAF seed
 
     return () => {
       cancelAnimationFrame(animId);
