@@ -1,10 +1,13 @@
 "use client";
 
-import { useState, useEffect, Suspense } from "react";
+import { useState, useEffect, useRef, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { CalendarDays, ArrowRight, ArrowLeft, Check, Building2, Wrench, User } from "lucide-react";
+import { Turnstile, type TurnstileInstance } from "@marsidev/react-turnstile";
 import Footer from "@/components/Footer";
+
+const TURNSTILE_SITE_KEY = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY;
 
 const BUSINESS_TYPES = [
   "HVAC / Heating & Cooling",
@@ -58,6 +61,8 @@ function ContactPageInner() {
   });
   const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
   const [direction, setDirection] = useState(1);
+  const [turnstileToken, setTurnstileToken] = useState("");
+  const turnstileRef = useRef<TurnstileInstance>(null);
 
   useEffect(() => {
     const service = searchParams.get("service");
@@ -66,6 +71,11 @@ function ContactPageInner() {
       setStep(1);
     }
   }, [searchParams]);
+
+  // Capture UTM params from URL
+  const utmSource = searchParams.get("utm_source") || "";
+  const utmMedium = searchParams.get("utm_medium") || "";
+  const utmCampaign = searchParams.get("utm_campaign") || "";
 
   function set(field: keyof FormData, value: string) {
     setForm((prev) => ({ ...prev, [field]: value }));
@@ -93,7 +103,12 @@ function ContactPageInner() {
         email: form.email,
         business: form.business,
         service: form.service,
+        phone: form.phone,
         message: `Business Type: ${form.businessType}\nPhone: ${form.phone}\n\n${form.message}`,
+        utm_source: utmSource,
+        utm_medium: utmMedium,
+        utm_campaign: utmCampaign,
+        ...(turnstileToken && { turnstileToken }),
       }),
     });
     if (res.ok) {
@@ -404,6 +419,16 @@ function ContactPageInner() {
                           />
                         </div>
                       </div>
+                      {TURNSTILE_SITE_KEY && (
+                        <div className="flex justify-center mt-4">
+                          <Turnstile
+                            ref={turnstileRef}
+                            siteKey={TURNSTILE_SITE_KEY}
+                            onSuccess={setTurnstileToken}
+                            onExpire={() => setTurnstileToken("")}
+                          />
+                        </div>
+                      )}
                       {status === "error" && (
                         <p className="text-red-500 text-sm mt-4 text-center">
                           Something went wrong. Please try again.

@@ -76,7 +76,7 @@ export default function Home() {
           </h1>
 
           <p className="text-lg md:text-xl text-white/70 max-w-2xl mx-auto mb-10 leading-relaxed">
-            Based in Raleigh, NC — we build fast, professional websites with full-service support covering design, hosting, updates, and SEO, so you can focus on running your business.
+            Based in Raleigh, NC — we build fast, professional websites for contractors, restaurants, HVAC companies, and local service businesses. Design, hosting, updates, and SEO — all handled, so you can focus on running your business.
           </p>
 
           {/* Magnetic CTA buttons */}

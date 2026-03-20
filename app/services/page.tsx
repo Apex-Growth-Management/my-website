@@ -4,12 +4,22 @@ import Link from "next/link";
 import { Monitor, Zap, Wrench, TrendingUp } from "lucide-react";
 import { motion } from "framer-motion";
 import Footer from "@/components/Footer";
+import FaqAccordion from "@/components/FaqAccordion";
 
 const services = [
   { Icon: Monitor, title: "Website Design", description: "We design custom, mobile-friendly websites tailored to your brand. From layout to color scheme to copywriting guidance — we handle it all. Your site will look great on every device and be built to convert visitors into leads.", features: ["Custom design", "Mobile responsive", "Fast load times", "Modern tech stack"] },
   { Icon: Zap, title: "Hosting & Performance", description: "Your website needs a reliable home. We provide fast, secure hosting with 99.9% uptime. No more worrying about downtime, slow load speeds, or expired SSL certificates.", features: ["99.9% uptime guarantee", "SSL certificate included", "Daily backups", "24/7 monitoring"] },
   { Icon: Wrench, title: "Website Maintenance", description: "Business changes, and your website should too. Whether you need new photos, updated pricing, a new page, or a small design tweak — we take care of it quickly so you don't have to learn code.", features: ["Text & image updates", "New pages or sections", "Layout adjustments", "Quick turnaround"] },
   { Icon: TrendingUp, title: "SEO Optimization", description: "Ranking on Google is how customers find you. We optimize your site's content, structure, and technical setup to improve your visibility in search results and drive real organic traffic.", features: ["Keyword research", "On-page SEO", "Technical SEO audit", "Monthly reporting"] },
+];
+
+const faqs = [
+  { q: "How long does it take to build a website?", a: "Most sites are designed, built, and ready for review within 2–3 business days after we receive your content (logo, photos, business info). Complex projects with custom features may take longer — we'll give you a timeline upfront." },
+  { q: "What's included in the monthly retainer?", a: "Hosting, website maintenance, content updates, and SEO are all included. We handle text edits, image swaps, and small layout changes at no extra cost. Larger projects like new pages or redesigns are scoped separately." },
+  { q: "Do I need to provide my own hosting?", a: "No — hosting is fully managed and included in your monthly fee. We host on Vercel, which provides fast load times, automatic SSL, and 99.9% uptime. You never deal with a hosting provider." },
+  { q: "Can I update the website myself?", a: "You can, but you don't have to. Most clients send us their changes and we handle them within 24 hours. If you prefer to make edits yourself, we can set up a content management system for your blog or specific pages." },
+  { q: "What if I want to cancel?", a: "We operate month-to-month with no long-term contracts. If you decide to cancel, just give us 30 days written notice. We'll transfer your website files and domain to you at no additional cost." },
+  { q: "Do you work with businesses outside of Raleigh?", a: "Yes — while we're based in Raleigh, NC, we work with local service businesses across the country. Everything is handled remotely, and we communicate via email, phone, and video calls." },
 ];
 
 const fadeUp = {
@@ -66,6 +76,22 @@ export default function ServicesPage() {
                 </div>
               </motion.div>
             ))}
+          </motion.div>
+
+          {/* FAQ */}
+          <motion.div
+            className="mt-20 max-w-3xl mx-auto"
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+          >
+            <div className="text-center mb-10">
+              <p className="text-blue-600 text-sm font-semibold uppercase tracking-widest mb-3">FAQ</p>
+              <h2 className="text-3xl font-extrabold mb-3">Common Questions</h2>
+              <p className="text-gray-500">Quick answers about how we work.</p>
+            </div>
+            <FaqAccordion items={faqs} />
           </motion.div>
 
           <motion.div

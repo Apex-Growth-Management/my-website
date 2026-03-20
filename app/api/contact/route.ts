@@ -1,5 +1,6 @@
 import { Resend } from "resend";
 import { NextRequest, NextResponse } from "next/server";
+import * as Sentry from "@sentry/nextjs";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 const ZAPIER_WEBHOOK = "https://hooks.zapier.com/hooks/catch/26639307/u0709gu/";
@@ -30,21 +31,48 @@ export async function POST(req: NextRequest) {
   // Rate limit
   const ip = req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ?? "unknown";
   if (isRateLimited(ip)) {
+    Sentry.captureMessage("Contact form rate limited", {
+      level: "warning",
+      extra: { ip, timestamp: new Date().toISOString() },
+    });
     return NextResponse.json({ error: "Too many requests" }, { status: 429 });
   }
 
   const body = await req.json();
 
   // Validate & sanitize
-  const firstName = clean(body.firstName, 100);
-  const lastName  = clean(body.lastName,  100);
-  const email     = clean(body.email,     254);
-  const business  = clean(body.business,  200);
-  const service   = clean(body.service,   100);
-  const message   = clean(body.message,  2000);
+  const firstName  = clean(body.firstName, 100);
+  const lastName   = clean(body.lastName,  100);
+  const email      = clean(body.email,     254);
+  const business   = clean(body.business,  200);
+  const service    = clean(body.service,   100);
+  const phone      = clean(body.phone,     30);
+  const message    = clean(body.message,  2000);
+  const utmSource  = clean(body.utm_source,   100);
+  const utmMedium  = clean(body.utm_medium,   100);
+  const utmCampaign = clean(body.utm_campaign, 100);
 
   if (!firstName || !lastName || !validEmail(email)) {
     return NextResponse.json({ error: "Invalid input" }, { status: 400 });
+  }
+
+  // Turnstile verification (skip if secret not configured)
+  const turnstileSecret = process.env.TURNSTILE_SECRET_KEY;
+  if (turnstileSecret) {
+    const turnstileToken = typeof body.turnstileToken === "string" ? body.turnstileToken : "";
+    if (!turnstileToken) {
+      return NextResponse.json({ error: "CAPTCHA verification required" }, { status: 400 });
+    }
+    const verifyRes = await fetch("https://challenges.cloudflare.com/turnstile/v0/siteverify", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: new URLSearchParams({ secret: turnstileSecret, response: turnstileToken, remoteip: ip }),
+    });
+    const verifyData = await verifyRes.json();
+    if (!verifyData.success) {
+      Sentry.captureMessage("Turnstile verification failed", { level: "warning", extra: { ip, codes: verifyData["error-codes"] } });
+      return NextResponse.json({ error: "CAPTCHA verification failed" }, { status: 403 });
+    }
   }
 
   // Send email via Resend
@@ -56,10 +84,12 @@ export async function POST(req: NextRequest) {
       <h2>New Contact Form Submission</h2>
       <p><strong>Name:</strong> ${firstName} ${lastName}</p>
       <p><strong>Email:</strong> ${email}</p>
+      <p><strong>Phone:</strong> ${phone || "Not provided"}</p>
       <p><strong>Business:</strong> ${business || "Not provided"}</p>
       <p><strong>Service:</strong> ${service || "Not selected"}</p>
       <p><strong>Message:</strong></p>
       <p>${message}</p>
+      ${utmSource ? `<hr><p style="color:#888;font-size:13px;"><strong>Source:</strong> ${utmSource} / ${utmMedium} / ${utmCampaign}</p>` : ""}
     `,
   });
 
@@ -146,45 +176,87 @@ export async function POST(req: NextRequest) {
   });
 
   // Send to Zapier webhook + lead alert worker (fire-and-forget, don't block response)
-  const webhookPayload = JSON.stringify({ firstName, lastName, email, business, service, message });
+  const webhookPayload = JSON.stringify({ firstName, lastName, email, phone, business, service, message, utmSource, utmMedium, utmCampaign });
   const webhookHeaders = { "Content-Type": "application/json" };
-  await Promise.allSettled([
+  const webhookResults = await Promise.allSettled([
     fetch(ZAPIER_WEBHOOK, { method: "POST", headers: webhookHeaders, body: webhookPayload }),
     fetch(LEAD_ALERT_WEBHOOK, { method: "POST", headers: webhookHeaders, body: webhookPayload }),
   ]);
+  const webhookNames = ["Zapier", "Lead Alert Worker"];
+  webhookResults.forEach((result, i) => {
+    if (result.status === "rejected") {
+      Sentry.captureException(result.reason, { extra: { webhook: webhookNames[i], email } });
+    } else if (!result.value.ok) {
+      Sentry.captureMessage(`${webhookNames[i]} webhook returned ${result.value.status}`, {
+        level: "error",
+        extra: { webhook: webhookNames[i], status: result.value.status, email },
+      });
+    }
+  });
 
-  // Create HubSpot contact + deal
+  // Create or update HubSpot contact + deal
   const hubspotToken = process.env.HUBSPOT_PRIVATE_APP_TOKEN;
   if (hubspotToken) {
+    const hsHeaders = { "Content-Type": "application/json", Authorization: `Bearer ${hubspotToken}` };
+    const contactProps = {
+      firstname: firstName,
+      lastname: lastName,
+      email,
+      phone: phone || "",
+      company: business || "",
+      hs_lead_status: "NEW",
+      message,
+      ...(utmSource && {
+        hs_analytics_source: utmSource,
+        hs_analytics_source_data_1: utmMedium,
+        hs_analytics_source_data_2: utmCampaign,
+      }),
+    };
+
     try {
-      // Create or update contact
-      const contactRes = await fetch("https://api.hubapi.com/crm/v3/objects/contacts", {
+      // Search for existing contact by email
+      let contactId: string | null = null;
+      const searchRes = await fetch("https://api.hubapi.com/crm/v3/objects/contacts/search", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${hubspotToken}`,
-        },
+        headers: hsHeaders,
         body: JSON.stringify({
-          properties: {
-            firstname: firstName,
-            lastname: lastName,
-            email,
-            company: business || "",
-            hs_lead_status: "NEW",
-            message,
-          },
+          filterGroups: [{ filters: [{ propertyName: "email", operator: "EQ", value: email }] }],
+          properties: ["email"],
+          limit: 1,
         }),
       });
 
-      const contactData = contactRes.ok ? await contactRes.json() : null;
+      if (searchRes.ok) {
+        const searchData = await searchRes.json();
+        if (searchData.total > 0) {
+          contactId = searchData.results[0].id;
+        }
+      }
+
+      if (contactId) {
+        // Update existing contact
+        await fetch(`https://api.hubapi.com/crm/v3/objects/contacts/${contactId}`, {
+          method: "PATCH",
+          headers: hsHeaders,
+          body: JSON.stringify({ properties: contactProps }),
+        });
+      } else {
+        // Create new contact
+        const contactRes = await fetch("https://api.hubapi.com/crm/v3/objects/contacts", {
+          method: "POST",
+          headers: hsHeaders,
+          body: JSON.stringify({ properties: contactProps }),
+        });
+        if (contactRes.ok) {
+          const contactData = await contactRes.json();
+          contactId = contactData.id;
+        }
+      }
 
       // Create deal linked to the contact
       const dealRes = await fetch("https://api.hubapi.com/crm/v3/objects/deals", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${hubspotToken}`,
-        },
+        headers: hsHeaders,
         body: JSON.stringify({
           properties: {
             dealname: `${firstName} ${lastName}${business ? ` — ${business}` : ""}`,
@@ -196,10 +268,10 @@ export async function POST(req: NextRequest) {
       });
 
       // Associate deal with contact
-      if (contactData?.id && dealRes.ok) {
+      if (contactId && dealRes.ok) {
         const dealData = await dealRes.json();
         await fetch(
-          `https://api.hubapi.com/crm/v3/objects/deals/${dealData.id}/associations/contacts/${contactData.id}/deal_to_contact`,
+          `https://api.hubapi.com/crm/v3/objects/deals/${dealData.id}/associations/contacts/${contactId}/deal_to_contact`,
           {
             method: "PUT",
             headers: { Authorization: `Bearer ${hubspotToken}` },

@@ -1,10 +1,13 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Search, CheckCircle, AlertTriangle, XCircle, ArrowRight, Zap, Globe, BarChart2, Shield } from "lucide-react";
+import { Turnstile, type TurnstileInstance } from "@marsidev/react-turnstile";
 import Link from "next/link";
 import Footer from "@/components/Footer";
+
+const TURNSTILE_SITE_KEY = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY;
 
 const AUDIT_CHECKS = [
   { icon: Zap, label: "Page Speed Analysis", description: "Core Web Vitals & load time" },
@@ -19,6 +22,8 @@ export default function AuditPage() {
   const [name, setName] = useState("");
   const [submitted, setSubmitted] = useState(false);
   const [sending, setSending] = useState(false);
+  const [turnstileToken, setTurnstileToken] = useState("");
+  const turnstileRef = useRef<TurnstileInstance>(null);
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -39,6 +44,7 @@ export default function AuditPage() {
         business: url,
         service: "Free Website Audit",
         message: `FREE AUDIT REQUEST\nWebsite: ${url}`,
+        ...(turnstileToken && { turnstileToken }),
       }),
     }).catch(() => {});
 
@@ -109,6 +115,17 @@ export default function AuditPage() {
                     className="flex-1 bg-white/5 border border-white/10 rounded-full px-5 py-4 text-white placeholder-white/30 focus:outline-none focus:border-blue-500 transition-colors text-sm"
                   />
                 </div>
+                {TURNSTILE_SITE_KEY && (
+                  <div className="flex justify-center">
+                    <Turnstile
+                      ref={turnstileRef}
+                      siteKey={TURNSTILE_SITE_KEY}
+                      onSuccess={setTurnstileToken}
+                      onExpire={() => setTurnstileToken("")}
+                      options={{ theme: "dark" }}
+                    />
+                  </div>
+                )}
                 <button
                   type="submit"
                   disabled={sending}
