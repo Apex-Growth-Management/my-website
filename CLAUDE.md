@@ -19,17 +19,22 @@
 - `app/about/page.tsx` — about page (founders section)
 - `app/services/page.tsx` — services offered
 - `app/portfolio/page.tsx` — template demos (HVAC, Restaurant, Plumber)
-- `app/contact/page.tsx` — multi-step contact form (3 steps: business type → service → contact info; Zapier webhook + Google Ads conversion)
-- `app/audit/page.tsx` — free website audit lead capture (URL input → submits to /api/contact as "FREE AUDIT REQUEST")
+- `app/contact/page.tsx` — multi-step contact form (3 steps: business type → service → contact info; Zapier webhook + Google Ads conversion + Turnstile CAPTCHA)
+- `app/audit/page.tsx` — free website audit lead capture (URL input → submits to /api/contact as "FREE AUDIT REQUEST" + Turnstile dark theme)
 - `app/audit/layout.tsx` — metadata for audit page
+- `app/referrals/page.tsx` — referral program page ($200 credit per converted referral)
+- `app/referrals/layout.tsx` — metadata for referrals page
+- `app/api/referral/route.ts` — referral form API (admin email + referrer confirmation + HubSpot contact/deal)
+- `app/error.tsx` — root error boundary (reports to Sentry)
+- `app/global-error.tsx` — catches root layout errors
 - `app/blog/page.tsx` — blog index (Sanity)
 - `app/blog/[slug]/page.tsx` — blog post (Sanity)
 - `app/blog/[slug]/opengraph-image.tsx` — dynamic OG image per post (next/og edge runtime)
 - `app/sitemap.ts` — async sitemap: static routes + live Sanity blog slugs
-- `app/robots.ts` — crawl rules (allow all, disallow /api/ /studio/)
+- `app/robots.ts` — crawl rules (allow all + explicit AI crawler rules: GPTBot, ClaudeBot, PerplexityBot, Google-Extended, Amazonbot, YouBot)
 - `app/layout.tsx` — root layout (Google tags, SmoothScroll, ScrollProgress, Navbar, PageTransition, StickyCTA, LocalBusinessSchema)
 - `components/Navbar.tsx` — shared navbar; "Free Audit" link in blue, "Get Started" CTA
-- `components/Footer.tsx` — shared footer; Instagram, both phones, email, UptimeBadge
+- `components/Footer.tsx` — shared footer; Instagram, both phones, email, UptimeBadge, "Refer & Earn $200" link
 - `components/StickyCTA.tsx` — sticky bottom bar, slides up after 40% scroll, dismissable
 - `components/UptimeBadge.tsx` — pulsing green dot + "99.9% uptime" in footer
 - `components/SmoothScroll.tsx` — Lenis inertia scroll wrapper
@@ -37,6 +42,7 @@
 - `components/FaqAccordion.tsx` — used on pricing page
 - `components/ScrambleText.tsx` — decrypt animation on scroll into view
 - `components/HeroParticles.tsx` — canvas particle network in hero
+- `public/llms.txt` — AI-readable business profile (services, pricing, FAQ, links) for GEO
 - `public/logo.png` — Apex Growth Management logo (transparent PNG)
 - `app/favicon.ico` — site favicon
 
@@ -54,7 +60,7 @@
 - Icons: lucide-react
 
 ## Footer
-See `components/Footer.tsx` for current implementation. Dark bg-gray-900, logo with brightness-0 invert, both phones, email, Instagram, Privacy/Terms links, UptimeBadge.
+See `components/Footer.tsx` for current implementation. Dark bg-gray-900, logo with brightness-0 invert, both phones, email, Instagram, Refer & Earn $200 link, Privacy/Terms links, UptimeBadge.
 
 ## Portfolio Templates
 - HVAC: https://hvac-template-taupe.vercel.app
@@ -97,6 +103,14 @@ Run `/end-of-session` skill. Backs up all config, checks pipeline, verifies depl
 - hvac-template: `prj_KPu00sNgUlsjG7KgkHVlaK9kfitN`
 - restaurant-template: `prj_4M0kjpFmG4LAa9Ri51I4eVeyr7ua`
 - plumber-template: `prj_e9ZYX31bOly5VLQ598bbsduleU5w`
+
+## GEO (Generative Engine Optimization)
+- `robots.ts` allows AI crawlers: GPTBot, ClaudeBot, PerplexityBot, Google-Extended, Amazonbot, YouBot
+- `public/llms.txt` serves AI-readable business profile at /llms.txt
+- FAQ schema (JSON-LD) on `/services` (6 Q&As) and `/pricing` (7 Q&As) via layout files
+- Article schema (JSON-LD) auto-generates on every `/blog/[slug]` page
+- Profiles: Clutch, DesignRush (created 2026-03-21)
+- 17 blog posts total as of 2026-03-21 (5 GEO-optimized definitive-answer posts added)
 
 ## Notes
 - No phone number in the navbar (removed by user request)
