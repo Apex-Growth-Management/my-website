@@ -43,8 +43,39 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
 
   if (!post) notFound();
 
+  const articleSchema = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: post.title,
+    description: post.excerpt,
+    datePublished: post.publishedAt,
+    dateModified: post.publishedAt,
+    author: {
+      "@type": "Organization",
+      name: "Apex Growth Management",
+      url: "https://apexgrowthmanagement.com",
+    },
+    publisher: {
+      "@type": "Organization",
+      name: "Apex Growth Management",
+      url: "https://apexgrowthmanagement.com",
+      logo: {
+        "@type": "ImageObject",
+        url: "https://apexgrowthmanagement.com/logo.png",
+      },
+    },
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": `https://apexgrowthmanagement.com/blog/${slug}`,
+    },
+  };
+
   return (
     <main className="bg-white text-gray-900 pt-24 min-h-screen">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
+      />
       <section className="py-20 px-6">
         <div className="max-w-3xl mx-auto">
           <Link href="/blog" className="text-blue-600 hover:text-blue-500 text-sm font-medium mb-8 inline-block">

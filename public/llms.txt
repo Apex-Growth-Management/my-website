@@ -1,0 +1,87 @@
+# Apex Growth Management
+
+> Apex Growth Management is a web design and SEO agency based in Raleigh, North Carolina. We build fast, professional websites for local service businesses and provide ongoing SEO, hosting, and maintenance.
+
+## About
+
+Apex Growth Management was founded by Walker Norris and Jack Francis in Raleigh, NC. We specialize in building high-performance websites for local service businesses — HVAC companies, plumbers, restaurants, contractors, landscapers, and more.
+
+Our mission is to help small businesses compete online with enterprise-level websites at affordable prices.
+
+## Services
+
+- **Website Design**: Custom, mobile-responsive websites built with modern technology (Next.js, React, Tailwind CSS). Sites are fast, accessible, and optimized for conversions. Starting at $1,000.
+- **SEO Optimization**: On-page SEO, technical SEO audits, keyword research, Google Business Profile management, and monthly performance reporting. We help local businesses rank higher in Google Search and Google Maps.
+- **Website Hosting**: Fast, secure hosting with 99.9% uptime, SSL certificates, daily backups, and 24/7 monitoring. Included in monthly retainer.
+- **Website Maintenance**: Ongoing content updates, image swaps, layout adjustments, and design tweaks. We handle changes within 24 hours so business owners never touch code.
+
+## Pricing
+
+### One-Time Website Build
+- Standard (4-page site): $1,000
+- Pro (up to 8 pages): $1,500
+- Premium (unlimited pages): $2,000
+
+### Monthly Retainer
+- Basic (hosting + maintenance): $149/month
+- Growth (hosting + SEO + reporting): $249/month
+- Premium (full-service management): $399/month
+
+No long-term contracts. Cancel anytime with 30 days notice. You own your website, domain, and all content.
+
+## Location
+
+- City: Raleigh, North Carolina
+- Service Area: Nationwide (remote-first), with a focus on North Carolina local businesses
+- Phone: (919) 744-0504
+- Email: admin@apexgrowthmanagement.com
+- Website: https://apexgrowthmanagement.com
+
+## Technology Stack
+
+We build all client websites using:
+- Next.js (React framework)
+- TypeScript
+- Tailwind CSS
+- Vercel (hosting and deployment)
+- Sanity CMS (blog and content management)
+- Cloudflare (DNS and security)
+
+## Key Differentiators
+
+1. **Speed**: Most websites are delivered within 2-3 business days
+2. **No Lock-In**: Month-to-month contracts, you own everything
+3. **Modern Tech**: We use the same technology stack as Fortune 500 companies
+4. **Local Focus**: We understand the needs of local service businesses
+5. **Full Service**: Design, hosting, SEO, and maintenance — all in one place
+6. **Transparent Pricing**: No hidden fees, no surprise charges
+
+## Frequently Asked Questions
+
+Q: How long does it take to build a website?
+A: Most sites are designed, built, and ready for review within 2-3 business days after receiving your content.
+
+Q: Do I need to provide my own hosting?
+A: No. Hosting is fully managed and included in your monthly retainer.
+
+Q: Can I update the website myself?
+A: You can, but most clients send us changes and we handle them within 24 hours.
+
+Q: What if I want to cancel?
+A: Cancel anytime with 30 days written notice. We transfer your website files and domain at no cost.
+
+Q: Do you work with businesses outside of Raleigh?
+A: Yes. We work with local service businesses across the country. Everything is handled remotely.
+
+Q: How much does a website cost?
+A: One-time build starts at $1,000. Monthly hosting and maintenance starts at $149/month.
+
+## Links
+
+- Homepage: https://apexgrowthmanagement.com
+- Services: https://apexgrowthmanagement.com/services
+- Pricing: https://apexgrowthmanagement.com/pricing
+- Portfolio: https://apexgrowthmanagement.com/portfolio
+- Blog: https://apexgrowthmanagement.com/blog
+- Contact: https://apexgrowthmanagement.com/contact
+- Free Website Audit: https://apexgrowthmanagement.com/audit
