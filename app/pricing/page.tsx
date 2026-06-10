@@ -13,7 +13,7 @@ const setupFees = [
   },
   {
     name: "Pro",
-    price: "$1,500",
+    price: "$2,000",
     description: "For businesses that need more pages and custom features.",
     features: ["Up to 8 pages", "Mobile responsive", "Contact form", "Advanced SEO setup", "Custom design elements", "3 rounds of revisions"],
     popular: true,
@@ -21,7 +21,7 @@ const setupFees = [
   },
   {
     name: "Premium",
-    price: "$2,000",
+    price: "$3,000",
     description: "Fully custom site with everything you need to stand out.",
     features: ["Unlimited pages", "Mobile responsive", "Contact form", "Full SEO setup", "Custom design", "Priority build time", "Unlimited revisions"],
     stripeUrl: "https://buy.stripe.com/3cIdRa1jp7da0Ur2630gw04",
@@ -31,14 +31,14 @@ const setupFees = [
 const retainers = [
   {
     name: "Basic",
-    price: "$149",
+    price: "$99",
     description: "Keep your site live and up to date.",
     features: ["Website hosting", "Monthly maintenance updates", "Uptime monitoring", "SSL certificate"],
     stripeUrl: "https://buy.stripe.com/5kQ4gAbY3gNKeLh9yv0gw0b",
   },
   {
     name: "Growth",
-    price: "$249",
+    price: "$149",
     description: "Grow your online presence month over month.",
     features: ["Everything in Basic", "SEO optimization", "Monthly performance report", "Google Business management"],
     popular: true,
@@ -46,7 +46,7 @@ const retainers = [
   },
   {
     name: "Premium",
-    price: "$399",
+    price: "$249",
     description: "Full-service management for serious businesses.",
     features: ["Everything in Growth", "Priority support", "Content updates", "Competitor analysis", "Quarterly strategy call"],
     stripeUrl: "https://buy.stripe.com/8x2aEY9PVeFCeLhdOL0gw0d",

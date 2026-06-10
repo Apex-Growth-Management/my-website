@@ -328,7 +328,7 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
             {[
               { label: "Website Build", value: "From $1,000", sub: "Standard · Pro · Premium", note: "One-time setup fee" },
-              { label: "Monthly Retainer", value: "From $149/mo", sub: "Basic · Growth · Premium", note: "Hosting, updates & SEO" },
+              { label: "Monthly Retainer", value: "From $99/mo", sub: "Basic · Growth · Premium", note: "Hosting, updates & SEO" },
               { label: "Contracts", value: "None", sub: "Cancel anytime", note: "30-day written notice" },
             ].map((item, i) => (
               <motion.div
